@@ -13,3 +13,29 @@ body {
   margin: 0px auto;
   width: 620px;
 }
+
+header {
+  padding: 20px 0 30px;
+  border-bottom: 1px solid #000;
+}
+
+h1,
+h2,
+h3 {
+  color: #9b4e4e;
+}
+
+/*
+CONTRIBUTIONS LIST
+*/
+header h1 {
+  text-align: center;
+}
+/*header with search engine*/
+.search-engine-wrapper {
+
+}
+.search-engine-wrapper input[type="text"] {
+  padding: 5px;
+  width: calc(100% - 105px);
+}
