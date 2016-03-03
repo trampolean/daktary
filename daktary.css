@@ -1,0 +1,10 @@
+/*
+GENERAL
+*/
+body {
+  font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+  font-size: 1rem;
+  color: #6c6c6c;
+  -webkit-font-smoothing: antialiased;
+  background:  #f8f8f8;
+}
