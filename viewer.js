@@ -1,1 +1,1 @@
-console.log("Test")
+let a = 1
