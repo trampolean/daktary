@@ -11,7 +11,12 @@
   <script src="../vendors/mocha/mocha.js"></script>
 
   <script>mocha.setup('bdd')</script>
+  <script src="../viewer.js"></script>
   <script src="test.viewer.js"></script>
+  <!-- Element in viewer html page -->
+  <div style="visibility: hidden">
+    <div id="contribution"></div>
+  </div>
   <script>
     mocha.checkLeaks()
     mocha.run()
