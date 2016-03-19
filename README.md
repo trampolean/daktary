@@ -1,5 +1,14 @@
 # daktary-team
 
+## Technologies
+
+Langages :
+* [ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla)
+
+Tests unitaires :
+* [Mocha](https://mochajs.org/)
+* [Expect](https://github.com/Automattic/expect.js)
+
 ## À prévoir
 * passer en SPA
 * installer travis
