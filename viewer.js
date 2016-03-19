@@ -1,1 +1,3 @@
-let a = 1
+const injectHTML = (content) => {
+  document.querySelector('#contribution').innerHTML = content
+}
