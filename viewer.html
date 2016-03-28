@@ -5,15 +5,14 @@
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="daktary.css">
     <link rel="stylesheet" href="viewer.css">
-    <script src="contribs/plato.js"></script>
     <script src="viewer.js"></script>
     <script>
       if (! navigator.onLine)
         window.location = './503.html'
     </script>
     <script>
-      const contributionHTML = content
-      window.onload = () => injectHTML(contributionHTML)
+      const ghUrl = './contribs/plato.html'
+      window.onload = () => injectHTML(ghUrl)
     </script>
     <title>Viewer</title>
   </head>

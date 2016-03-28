@@ -1,9 +1,10 @@
   /**
    * Inject HTML code in #contribution tag.
    *
-   * @param {String} An HTML string reprsenting a contribution.
+   * @param {String} An HTML string representing a github Url contribution.
    *
    */
-const injectHTML = (content) => {
-  document.querySelector('#contribution').innerHTML = content
-}
+const injectHTML = ghUrl =>
+  fetch(ghUrl)
+    .then(response => response.text())
+    .then(html => document.querySelector('#contribution').innerHTML = html)
