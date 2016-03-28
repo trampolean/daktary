@@ -8,6 +8,10 @@
     <script src="contribs/plato.js"></script>
     <script src="viewer.js"></script>
     <script>
+      if (! navigator.onLine)
+        window.location = './503.html'
+    </script>
+    <script>
       const contributionHTML = content
       window.onload = () => injectHTML(contributionHTML)
     </script>
