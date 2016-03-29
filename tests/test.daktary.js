@@ -13,5 +13,12 @@ describe('Daktary', () =>
         'daktary-team/contributions/blob/master/créer_un_depôt_github.md')
       expect(validGhUrl.isValid).to.be(true)
     })
+    it('should load a ressource with a local url', (done) => {
+      const localUrl = new GithubUrl('/tests/assets/contrib.html')
+      localUrl.loadGhContrib(localUrl.ghUrl, (html) => {
+        expect(html).to.be('<p>A contribution</p>\n')
+        done()
+      })
+    })
   })
 )
