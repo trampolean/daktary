@@ -5,8 +5,6 @@
    *
    */
 const injectHTML = ghUrl => {
-  const ghContrib = new GithubUrl(ghUrl)
-  ghContrib.loadGhContrib(ghContrib.ghUrl, (html) => {
-    document.querySelector('#contribution').innerHTML = html
-  })
+  new GithubBlob(ghUrl,
+    (html) => document.querySelector('#contribution').innerHTML = html)
 }

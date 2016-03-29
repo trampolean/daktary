@@ -1,4 +1,4 @@
-describe('Daktary', () =>
+
   describe('#GhUrl', () => {
     it('should create a GitHubUrl object', () => {
       const noValidGhUrl = new GithubUrl('#NotAnUrl')
@@ -13,12 +13,19 @@ describe('Daktary', () =>
         'daktary-team/contributions/blob/master/créer_un_depôt_github.md')
       expect(validGhUrl.isValid).to.be(true)
     })
+  })
+  describe('#GithubBlob', () => {
     it('should load a ressource with a local url', (done) => {
-      const localUrl = new GithubUrl('/tests/assets/contrib.html')
-      localUrl.loadGhContrib(localUrl.ghUrl, (html) => {
-        expect(html).to.be('<p>A contribution</p>\n')
+      const keys = {id: atob(GH_ID), secret: atob(GH_SECRET)}
+      const localUrl =
+        new GithubBlob('daktary-team/daktary-team/blob/master/README.md')
+      const ghApiUrl =
+        `https://api.github.com/repos/daktary-team/daktary-team/` +
+        `contents/README.md?ref=master&client_id=${keys.id}` +
+        `&client_secret=${keys.secret}`
+      localUrl.loadGhContrib(ghApiUrl, (html) => {
+        expect(html).to.contain('daktary')
         done()
       })
     })
   })
-)
