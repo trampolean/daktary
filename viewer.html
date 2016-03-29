@@ -5,13 +5,16 @@
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="daktary.css">
     <link rel="stylesheet" href="viewer.css">
-    <script src="viewer.js"></script>
+    <script src="/lib/daktary.js"></script>
+    <script src="/viewer.js"></script>
     <script>
-      if (! navigator.onLine)
+      if (! navigator.onLine) {
         window.location = './503.html'
+      }
     </script>
     <script>
-      const ghUrl = './contribs/plato.html'
+    console.log('GithubUrl', GithubUrl)
+      const ghUrl = window.location.toString().split('#')[1]
       window.onload = () => injectHTML(ghUrl)
     </script>
     <title>Viewer</title>

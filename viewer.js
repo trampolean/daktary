@@ -4,7 +4,9 @@
    * @param {String} An HTML string representing a github Url contribution.
    *
    */
-const injectHTML = ghUrl =>
-  fetch(ghUrl)
-    .then(response => response.text())
-    .then(html => document.querySelector('#contribution').innerHTML = html)
+const injectHTML = ghUrl => {
+  const ghContrib = new GithubUrl(ghUrl)
+  ghContrib.loadGhContrib(ghContrib.ghUrl, (html) => {
+    document.querySelector('#contribution').innerHTML = html
+  })
+}
