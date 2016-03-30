@@ -13,6 +13,13 @@
         'daktary-team/contributions/blob/master/créer_un_depôt_github.md')
       expect(validGhUrl.isValid).to.be(true)
     })
+    it('should generate an API GitHub url', () => {
+      const validGhUrl = new GithubUrl('owner/repo/blob/master/file.md')
+      expect(validGhUrl.toGhApiUrl().startsWith(
+        'https://api.github.com/repos/owner/repo/contents/' +
+        'file.md?ref=master&client_id='
+      )).to.be(true)
+    })
   })
   describe('#GithubBlob', () => {
     it('should load a ressource with a local url', (done) => {
