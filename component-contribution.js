@@ -1,7 +1,8 @@
 /**
- * Create data for Github ressources with a Github tree Url.
+ * Load data from a Github contribution with a Github blob Url.
  *
- * @param {String} A string representing a github Url tree.
+ * @param {String} A string representing a github Url blob.
+ * @param {Function} A callback function to treat data after is loading.
  * @result {String} A string representing an html list.
  */
 const dataContribution = (ghUrl, callback) => {
