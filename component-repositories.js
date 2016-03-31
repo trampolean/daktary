@@ -28,9 +28,9 @@ const dataRepositories = () =>
       link: 'repos.html#daktary/contribs/tree/master/examples',
       label: 'daktary-contribs'
     }, {
-      title: 'vferries : blog > _posts',
-      link: 'repos.html#vferries/blog/tree/gh-pages/_posts',
-      label: 'Vincent Ferries'
+      title: 'Démocratie ouverte : contributions',
+      link: 'repos.html#alecoz/democratie_ouverte/tree/master/contributions',
+      label: 'Démocratie ouverte'
     }, {
       title: 'multibao : contributions > contributions',
       link: 'repos.html#multibao/contributions/tree/master/contributions',
