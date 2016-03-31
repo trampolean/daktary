@@ -25,18 +25,3 @@ describe('#GhUrl', () => {
     )).to.be(true)
   })
 })
-describe('#GithubBlob', () => {
-  it('should load a ressource with a local url', (done) => {
-    const keys = {id: atob(GH_ID), secret: atob(GH_SECRET)}
-    const localUrl =
-      new GithubBlob('daktary-team/daktary-team/blob/master/README.md')
-    const ghApiUrl =
-      `https://api.github.com/repos/daktary-team/daktary-team/` +
-      `contents/README.md?ref=master&client_id=${keys.id}` +
-      `&client_secret=${keys.secret}`
-    localUrl.loadGhContrib(ghApiUrl, (html) => {
-      expect(html).to.contain('daktary')
-      done()
-    })
-  })
-})
