@@ -10,14 +10,17 @@
  */
 const tplRessources = (data) =>
   data.ressources.map(elt =>
-    `<article class="gh-list-item">
+    `<article class="gh-list-item gh-type-${elt.type}">
        <h2 class="gh-list-title"><a href="${elt.url}">${elt.name}</a></h2>
        <div class="gh-list-meta">
          <p>Créé le : 02/02/12 / Mis à jour le : 02/02/16</p>
          <p>Créé par : <a href="">pntbr</a> / Contributeurs les plus actifs :
            <a href="">pntbr</a> / <a href="">wolffgang</a>
          </p>
-         <p><a href="">Editer la ficher</a> - <a href="">Voir sur Github</a></p>
+         <p>
+           ${elt.type === 'file' ? `<a href="${elt.prose_url}">Editer la fiche</a> - ` : ''}
+           <a href="${elt.git_url}">Voir sur Github</a>
+         </p>
        </div>
        <!--si image-->
          <img src="http://placehold.it/350x150">
@@ -38,9 +41,13 @@ const dataRessources = (ghUrl, callback) => {
   fetch(apiUrl)
     .then(response => response.json())
     .then(json => {
-      const ressources = json.map(ressource => ({
-        name: ressource.name,
-        url: `/viewer.html#${ressource.html_url.match(/^https:\/\/github.com\/(.*)/)[1]}`
+      const html = {file: 'viewer.html', dir: 'repos.html'}
+      const ressources = json.map(elt => ({
+        name: elt.name,
+        type: elt.type,
+        prose_url: `http://prose.io/#${elt.html_url.match(/^https:\/\/github.com\/(.*)/)[1]}`.replace('blob', 'edit'),
+        git_url: elt.html_url,
+        url: `/${html[elt.type]}#${elt.html_url.match(/^https:\/\/github.com\/(.*)/)[1]}`
       }))
       callback(ressources)
     })
