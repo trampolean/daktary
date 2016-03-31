@@ -21,3 +21,35 @@ const injectContribution = ghUrl => {
   dataContribution(ghUrl,
     (html) => document.querySelector('#contribution').innerHTML = html)
 }
+/**
+ * Template for parent repository.
+ *
+ * @param {Object} Data to be injects in the template.
+ * {repo {link, label}}
+ *
+ * @result {String} A string representing an html link.
+ */
+const tplParentRepo = (data) =>
+  `À retrouver dans le dépôt : <a href="${data.link}">${data.label}</a>`
+
+/**
+ * Create data for parent repository using a github blobs Url.
+ *
+ * @param {String} A string representing a github Url blobs.
+ * @result {Object} A object with label and link to parent repository.
+ */
+const dataParentRepo = ghUrl => {
+  const {owner, repo, branch, filename} = new GithubUrl(ghUrl).ghData
+  const urlParentRepo = `/repos.html#${owner}/${repo}/tree/${branch}/` +
+    `${filename.replace(/[A-Za-z\u00C0-\u017F+\-\_]*[.]md$/, '')}`
+  return {link: urlParentRepo, label: `${owner} - ${repo}`}
+}
+/**
+ * Inject HTML code in #breadcrumb tag.
+ *
+ * @param {String} An HTML string representing a github Url contribution.
+ *
+ */
+const injectParentRepo = ghUrl =>
+  document.querySelector('#parentRepo').innerHTML =
+    tplParentRepo(dataParentRepo(ghUrl))

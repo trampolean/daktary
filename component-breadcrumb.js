@@ -37,7 +37,7 @@ const dataBreadcrumb = ghUrl => {
     },
     repo: {
       label: repo,
-      link: `//github.com/${owner}/${repo}`
+      link: `/repos.html#${owner}/${repo}/tree/${branch}`
     },
     folders: folders
   }

@@ -36,9 +36,9 @@ const dataRepositories = () =>
       link: 'repos.html#multibao/contributions/tree/master/contributions',
       label: 'multibao'
     }, {
-      title: 'traducteurs-agiles : traducteurs-agiles.github.io > _posts',
-      link: 'repos.html#les-traducteurs-agiles/les-traducteurs-agiles.github.io/tree/gh-pages/_posts',
-      label: 'Les traducteurs agiles'
+      title: 'Lilian Ricaud : lilianricaud > Minga',
+      link: 'repos.html#lilianricaud/Minga/tree/master',
+      label: 'Lilian Ricaud'
     }
   ]})
 /**
