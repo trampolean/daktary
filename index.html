@@ -10,6 +10,7 @@
     <script src="/lib/daktary.js"></script>
     <script src="/layout-repositories.js"></script>
     <script src="/layout-viewer.js"></script>
+    <script src="/component-search.js"></script>
     <script src="/component-repositories.js"></script>
     <script src="/component-breadcrumb.js"></script>
     <script src="/component-ressources.js"></script>
@@ -21,7 +22,8 @@
       window.onhashchange = () => window.location.reload(true)
     </script>
     <script>
-      const ghUrl = window.location.toString().split('#')[1]
+      const ghUrl = window.location.toString().split('#')[1] ||
+        'multibao/contributions/tree/master/contributions'
       const githubUrl = new GithubUrl(ghUrl)
       if (! githubUrl.isValid) {
         window.location = './404.html'
@@ -29,7 +31,8 @@
       window.onload = () => {
         if (githubUrl.checkGhTree()) {
           injectLayoutRepos()
-          injectRepositories()
+          injectSearch(ghUrl)
+          injectRepositories(ghUrl)
           injectBreadcrumb(ghUrl)
           injectRessources(ghUrl)
         }

@@ -9,11 +9,20 @@
 const tplRepositories = (data) =>
   `<ul>` +
      data.repos.map(repo =>
-      `<li><a class="${repo.class}" title="${repo.title}" href="${repo.link}"` +
-      ` title="${repo.title}">${repo.label}</a></li>`
+      `<li><a title="${repo.title}" href="${repo.link}"` +
+      ` data-owner="${repo.owner}" data-repo="${repo.repo}">${repo.label}</a></li>`
      ).join('\n') +
   `</ul>`
-
+/**
+ * Attach an event click on repositories list.
+ *
+ * @param {String} An HTML string representing a github Url contribution.
+ */
+const selectedRepositories = (ghUrl) => {
+  const {owner, repo, branch, filename} = new GithubUrl(ghUrl).ghData
+  document.querySelector(`a[data-owner="${owner}"][data-repo="${repo}"]`)
+    .classList.add('selected')
+}
 /**
  * Create data for breadcrumb with a github tree Url.
  *
@@ -22,23 +31,29 @@ const tplRepositories = (data) =>
  */
 const dataRepositories = () =>
   ({repos: [
-    {
-      class: 'selected',
-      title: 'daktary : contribs > examples',
+    { title: 'daktary : contribs > examples',
       link: '#daktary/contribs/tree/master/examples',
-      label: 'daktary-contribs'
+      label: 'daktary-contribs',
+      owner: 'daktary',
+      repo: 'contribs'
     }, {
       title: 'Démocratie ouverte : contributions',
       link: '#alecoz/democratie_ouverte/tree/master/contributions',
-      label: 'Démocratie ouverte'
+      label: 'Démocratie ouverte',
+      owner: 'alecoz',
+      repo: 'democratie_ouverte'
     }, {
       title: 'multibao : contributions > contributions',
       link: '#multibao/contributions/tree/master/contributions',
-      label: 'multibao'
+      label: 'multibao',
+      owner: 'multibao',
+      repo: 'contributions'
     }, {
       title: 'Lilian Ricaud : lilianricaud > Minga',
       link: '#lilianricaud/Minga/tree/master',
-      label: 'Lilian Ricaud'
+      label: 'Lilian Ricaud',
+      owner: 'lilianricaud',
+      repo: 'Minga'
     }
   ]})
 /**
@@ -47,6 +62,10 @@ const dataRepositories = () =>
  * @param {String} An HTML string representing a github Url contribution.
  *
  */
-const injectRepositories = () =>
+const injectRepositories = (ghUrl) => {
+  // const
   document.querySelector('#gh-repo-list').innerHTML =
     tplRepositories(dataRepositories())
+  selectedRepositories(ghUrl)
+}
+

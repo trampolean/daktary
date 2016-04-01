@@ -5,14 +5,8 @@
 const tplLayoutRepos = () => `
   <header>
     <h1>MultiBao</h1>
-    <div class="search-engine-wrapper">
-      <h2>Recherche</h2>
-      <div class="search-engine">
-        <fieldset>
-          <input id="gh-search" type="text">
-          <input value="Rechercher" type="submit">
-        </fieldset>
-      </div>
+    <div id="search-engine-wrapper" class="search-engine-wrapper">
+      <!-- from component-search.js -->
     </div>
   </header>
   <aside>
