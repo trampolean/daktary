@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="daktary.css">
+    <link rel="stylesheet" href="layout-repositories.css">
+    <link rel="stylesheet" href="layout-viewer.css">
+    <script src="/config.js"></script>
+    <script src="/lib/daktary.js"></script>
+    <script src="/layout-repositories.js"></script>
+    <script src="/layout-viewer.js"></script>
+    <script src="/component-repositories.js"></script>
+    <script src="/component-breadcrumb.js"></script>
+    <script src="/component-ressources.js"></script>
+    <script src="/component-contribution.js"></script>
+    <script>
+      if (! navigator.onLine) {
+        window.location = './503.html'
+      }
+      window.onhashchange = () => window.location.reload(true)
+    </script>
+    <script>
+      const ghUrl = window.location.toString().split('#')[1]
+      const githubUrl = new GithubUrl(ghUrl)
+      if (! githubUrl.isValid) {
+        window.location = './404.html'
+      }
+      window.onload = () => {
+        if (githubUrl.checkGhTree()) {
+          injectLayoutRepos()
+          injectRepositories()
+          injectBreadcrumb(ghUrl)
+          injectRessources(ghUrl)
+        }
+        if (githubUrl.checkGhBlob()) {
+          injectLayoutViewer()
+          injectContribution(ghUrl)
+          injectParentRepo(ghUrl)
+        }
+      }
+    </script>
+    <title>Multibao - apprendre des autres cultures.</title>
+  </head>
+  <body>
+    <div id="container" class="container">
+    </div>
+  </body>
+</html>

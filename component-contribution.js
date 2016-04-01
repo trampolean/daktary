@@ -40,7 +40,7 @@ const tplParentRepo = (data) =>
  */
 const dataParentRepo = ghUrl => {
   const {owner, repo, branch, filename} = new GithubUrl(ghUrl).ghData
-  const urlParentRepo = `/repos.html#${owner}/${repo}/tree/${branch}/` +
+  const urlParentRepo = `/#${owner}/${repo}/tree/${branch}/` +
     `${filename.replace(/(\/|)[A-Za-z\u00C0-\u017F+\-\_]*[.]md$/, '')}`
   return {link: urlParentRepo, label: `${owner} - ${repo}`}
 }

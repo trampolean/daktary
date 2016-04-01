@@ -10,7 +10,7 @@
  */
 const tplBreadcrumb = (data) =>
   `<ul>
-     <li><a href="/repos.html">Accueil</a></li>
+     <li><a href="/">Accueil</a></li>
      <li><a href="${data.owner.link}">${data.owner.label}</a></li>
      <li><a href="${data.repo.link}">${data.repo.label}</a></li>` +
      data.folders.map(folder =>
@@ -27,7 +27,7 @@ const tplBreadcrumb = (data) =>
 const dataBreadcrumb = ghUrl => {
   const {owner, repo, branch, filename} = new GithubUrl(ghUrl).ghData
   const folders = filename.split('/').map(elt => ({
-    link: `/repos.html#${owner}/${repo}/tree/${branch}/${elt}`,
+    link: `/#${owner}/${repo}/tree/${branch}/${elt}`,
     label: elt
   }))
   return {
@@ -37,7 +37,7 @@ const dataBreadcrumb = ghUrl => {
     },
     repo: {
       label: repo,
-      link: `/repos.html#${owner}/${repo}/tree/${branch}`
+      link: `/#${owner}/${repo}/tree/${branch}`
     },
     folders: folders
   }

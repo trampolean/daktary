@@ -3,7 +3,7 @@ describe('#Repositories', () => {
     const repositories = tplRepositories({repos: [{
       class: 'selected',
       title: 'daktary : contribs > examples',
-      link: 'repos.html#daktary/contribs/tree/master/examples',
+      link: '#daktary/contribs/tree/master/examples',
       label: 'daktary-contribs'
     }]})
     expect(repositories).to.contain('>daktary-contribs</a>')

@@ -22,7 +22,7 @@ const tplRessources = (data) =>
            <a href="${elt.git_url}">Voir sur Github</a>
          </p>
        </div>
-       <!--si image-->
+       <!--si <image--></image-->
          <img src="http://placehold.it/350x150">
        <!--/si image-->
        <p class="gh-list-excerpt">Le début de la fiche qui parle de ...</p>
@@ -41,13 +41,12 @@ const dataRessources = (ghUrl, callback) => {
   fetch(apiUrl)
     .then(response => response.json())
     .then(json => {
-      const html = {file: 'viewer.html', dir: 'repos.html'}
       const ressources = json.map(elt => ({
         name: elt.name,
         type: elt.type,
         prose_url: `http://prose.io/#${elt.html_url.match(/^https:\/\/github.com\/(.*)/)[1]}`.replace('blob', 'edit'),
         git_url: elt.html_url,
-        url: `/${html[elt.type]}#${elt.html_url.match(/^https:\/\/github.com\/(.*)/)[1]}`
+        url: `/#${elt.html_url.match(/^https:\/\/github.com\/(.*)/)[1]}`
       }))
       callback(ressources)
     })

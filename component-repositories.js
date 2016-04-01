@@ -25,19 +25,19 @@ const dataRepositories = () =>
     {
       class: 'selected',
       title: 'daktary : contribs > examples',
-      link: 'repos.html#daktary/contribs/tree/master/examples',
+      link: '#daktary/contribs/tree/master/examples',
       label: 'daktary-contribs'
     }, {
       title: 'Démocratie ouverte : contributions',
-      link: 'repos.html#alecoz/democratie_ouverte/tree/master/contributions',
+      link: '#alecoz/democratie_ouverte/tree/master/contributions',
       label: 'Démocratie ouverte'
     }, {
       title: 'multibao : contributions > contributions',
-      link: 'repos.html#multibao/contributions/tree/master/contributions',
+      link: '#multibao/contributions/tree/master/contributions',
       label: 'multibao'
     }, {
       title: 'Lilian Ricaud : lilianricaud > Minga',
-      link: 'repos.html#lilianricaud/Minga/tree/master',
+      link: '#lilianricaud/Minga/tree/master',
       label: 'Lilian Ricaud'
     }
   ]})
