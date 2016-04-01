@@ -13,7 +13,7 @@ const tplRessources = (data) =>
     `<article class="gh-list-item gh-type-${elt.type}">
        <h2 class="gh-list-title"><a href="${elt.url}">${elt.name}</a></h2>
        <div class="gh-list-meta">
-         <p>Créé le : 02/02/12 / Mis à jour le : 02/02/16</p>
+         <p>Mis à jour le : 02/02/16</p>
          <p>Créé par : <a href="">pntbr</a> / Contributeurs les plus actifs :
            <a href="">pntbr</a> / <a href="">wolffgang</a>
          </p>
@@ -38,7 +38,7 @@ const tplRessources = (data) =>
  */
 const dataRessources = (ghUrl, callback) => {
   const apiUrl = new GithubUrl(ghUrl).toGhApiUrl()
-  fetch(apiUrl)
+  fetch(apiUrl, {headers: {Accept: 'application/vnd.github.v3.html'}})
     .then(response => response.json())
     .then(json => {
       const ressources = json.map(elt => ({
@@ -52,6 +52,27 @@ const dataRessources = (ghUrl, callback) => {
     })
 }
 /**
+ * Create data for Github ressources by searching with a Github tree Url.
+ *
+ * @param {String} A string representing a github Url tree.
+ * @result {String} A string representing an html list.
+ */
+const dataSearchRessources = (ghUrl, search, callback) => {
+  const apiUrl = new GithubUrl(ghUrl).toGhApiSearch(search)
+  fetch(apiUrl, {headers: {Accept: 'application/vnd.github.v3.html'}})
+    .then(response => response.json())
+    .then(json => {
+      const ressources = json.items.map(elt => ({
+        name: elt.name,
+        type: elt.type,
+        prose_url: `http://prose.io/#${elt.html_url.match(/^https:\/\/github.com\/(.*)/)[1]}`.replace('blob', 'edit'),
+        git_url: elt.html_url,
+        url: `/#${elt.repository.full_name}/blob/master/${elt.path}`
+      }))
+      callback(ressources)
+    })
+}
+/**
  * Inject HTML code in #gh-list tag.
  *
  * @param {String} An HTML string representing a github Url contribution.
@@ -59,4 +80,15 @@ const dataRessources = (ghUrl, callback) => {
  */
 const injectRessources = ghUrl =>
   dataRessources(ghUrl, ressources =>
-    document.querySelector('#gh-list').innerHTML = tplRessources({ressources: ressources}))
+    document.querySelector('#gh-list').innerHTML =
+      tplRessources({ressources: ressources}))
+/**
+ * Inject HTML code in #gh-list tag.
+ *
+ * @param {String} An HTML string representing a github Url contribution.
+ *
+ */
+const injectSearchRessources = (ghUrl, userQuery)  =>
+  dataSearchRessources(ghUrl, userQuery, ressources =>
+    document.querySelector('#gh-list').innerHTML =
+      tplRessources({ressources: ressources}))
