@@ -10,12 +10,18 @@ Tests unitaires :
 * [Expect](https://github.com/Automattic/expect.js)
 
 ## À prévoir
-* passer en SPA
 * installer travis
 * CNAME
 * Select dans la liste de repo
 * Classement des dossiers
 * Liens après un fork
+* Home
+* Nombre de contributions
+* Notifications
+* vrai SLA
+
+## Discussion intégration
+* class ou id
 
 ## Pour tester le site en local
 ```bash
