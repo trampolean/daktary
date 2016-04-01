@@ -12,6 +12,10 @@ Tests unitaires :
 ## À prévoir
 * passer en SPA
 * installer travis
+* CNAME
+* Select dans la liste de repo
+* Classement des dossiers
+* Liens après un fork
 
 ## Pour tester le site en local
 ```bash
