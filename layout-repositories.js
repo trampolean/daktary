@@ -28,5 +28,10 @@ const tplLayoutRepos = () => `
  * Inject HTML code in #container tag.
  *
  */
-const injectLayoutRepos = () =>
+const injectLayoutRepos = (ghUrl) => {
   document.querySelector('#container').innerHTML = tplLayoutRepos()
+  injectSearch(ghUrl)
+  injectRepositories(ghUrl)
+  injectBreadcrumb(ghUrl)
+  injectRessources(ghUrl)
+}

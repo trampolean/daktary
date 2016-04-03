@@ -16,5 +16,8 @@ const tplLayoutViewer = () => `
  * Inject HTML code in #container tag.
  *
  */
-const injectLayoutViewer = () =>
+const injectLayoutViewer = (ghUrl) => {
   document.querySelector('#container').innerHTML = tplLayoutViewer()
+  injectContribution(ghUrl)
+  injectParentRepo(ghUrl)
+}
