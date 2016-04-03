@@ -19,6 +19,7 @@ Tests unitaires :
 * Nombre de contributions
 * Notifications
 * vrai SLA
+* Créer une gestion Template
 
 ## Discussion intégration
 * class ou id
