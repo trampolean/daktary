@@ -8,7 +8,7 @@
  *
  * @result {String} A string representing an html list.
  */
-const tplBreadcrumb = (data) =>
+const tplBreadcrumb = data =>
   `<ul>
      <li><a href="/">Accueil</a></li>
      <li><a href="${data.owner.link}">${data.owner.label}</a></li>
@@ -24,12 +24,18 @@ const tplBreadcrumb = (data) =>
  * @param {String} A string representing a github Url tree.
  * @result {String} A string representing an html list.
  */
-const dataBreadcrumb = ghUrl => {
-  const {owner, repo, branch, filename} = new GithubUrl(ghUrl).ghData
-  const folders = filename.split('/').map(elt => ({
-    link: `/#${owner}/${repo}/tree/${branch}/${elt}`,
-    label: elt
-  }))
+const dataBreadcrumb = ({owner, repo, branch, path}) => {
+  const folders = []
+  if (path) {
+    const pathByFolder = []
+    path.split('/').map(elt => {
+      pathByFolder.push(`/${elt}`)
+      folders.push({
+        link: `/#${owner}/${repo}/tree/${branch}${pathByFolder.join('')}`,
+        label: elt
+      })
+    })
+  }
   return {
     owner: {
       label: owner,
@@ -48,6 +54,6 @@ const dataBreadcrumb = ghUrl => {
  * @param {String} An HTML string representing a github Url contribution.
  *
  */
-const injectBreadcrumb = ghUrl =>
+const injectBreadcrumb = () =>
   document.querySelector('#breadcrumb').innerHTML =
-    tplBreadcrumb(dataBreadcrumb(ghUrl))
+    tplBreadcrumb(dataBreadcrumb(router.params))

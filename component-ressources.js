@@ -36,8 +36,9 @@ const tplRessources = (data) =>
  * @param {String} A string representing a github Url tree.
  * @result {String} A string representing an html list.
  */
-const dataRessources = (ghUrl, callback) => {
-  const apiUrl = new GithubUrl(ghUrl).toGhApiUrl()
+const dataRessources = ({owner, repo, branch, path}, callback) => {
+  const params = {owner: owner, repo: repo, branch: branch, path: path}
+  const apiUrl = new GithubUrl(params).toGhApiUrl()
   fetch(apiUrl, {headers: {Accept: 'application/vnd.github.v3.html'}})
     .then(response => response.json())
     .then(json => {
@@ -57,8 +58,9 @@ const dataRessources = (ghUrl, callback) => {
  * @param {String} A string representing a github Url tree.
  * @result {String} A string representing an html list.
  */
-const dataSearchRessources = (ghUrl, search, callback) => {
-  const apiUrl = new GithubUrl(ghUrl).toGhApiSearch(search)
+const dataSearch = ({owner, repo, branch, path}, search, callback) => {
+  const params = {owner: owner, repo: repo, branch: branch, path: path}
+  const apiUrl = new GithubUrl(params).toGhApiSearch(search)
   fetch(apiUrl, {headers: {Accept: 'application/vnd.github.v3.html'}})
     .then(response => response.json())
     .then(json => {
@@ -78,8 +80,8 @@ const dataSearchRessources = (ghUrl, search, callback) => {
  * @param {String} An HTML string representing a github Url contribution.
  *
  */
-const injectRessources = ghUrl =>
-  dataRessources(ghUrl, ressources =>
+const injectRessources = () =>
+  dataRessources(router.params, ressources =>
     document.querySelector('#gh-list').innerHTML =
       tplRessources({ressources: ressources}))
 /**
@@ -88,7 +90,7 @@ const injectRessources = ghUrl =>
  * @param {String} An HTML string representing a github Url contribution.
  *
  */
-const injectSearchRessources = (ghUrl, userQuery)  =>
-  dataSearchRessources(ghUrl, userQuery, ressources =>
+const injectSearchRessources = (userQuery)  =>
+  dataSearch(router.params, userQuery, ressources =>
     document.querySelector('#gh-list').innerHTML =
       tplRessources({ressources: ressources}))

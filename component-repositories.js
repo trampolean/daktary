@@ -18,8 +18,7 @@ const tplRepositories = (data) =>
  *
  * @param {String} An HTML string representing a github Url contribution.
  */
-const selectedRepositories = (ghUrl) => {
-  const {owner, repo, branch, filename} = new GithubUrl(ghUrl).ghData
+const selectedRepositories = ({owner, repo, branch, path}) => {
   document.querySelector(`a[data-owner="${owner}"][data-repo="${repo}"]`)
     .classList.add('selected')
 }
@@ -31,29 +30,53 @@ const selectedRepositories = (ghUrl) => {
  */
 const dataRepositories = () =>
   ({repos: [
-    { title: 'daktary : contribs > examples',
-      link: '#daktary/contribs/tree/master/examples',
-      label: 'daktary-contribs',
-      owner: 'daktary',
-      repo: 'contribs'
-    }, {
-      title: 'Démocratie ouverte : contributions',
-      link: '#alecoz/democratie_ouverte/tree/master/contributions',
-      label: 'Démocratie ouverte',
-      owner: 'alecoz',
-      repo: 'democratie_ouverte'
-    }, {
-      title: 'multibao : contributions > contributions',
-      link: '#multibao/contributions/tree/master/contributions',
-      label: 'multibao',
+    { title: 'Bienvenue sur multiBàO',
+      link: '#multibao/contributions/tree/master/pages',
+      label: 'Accueil Multibao',
       owner: 'multibao',
       repo: 'contributions'
     }, {
-      title: 'Lilian Ricaud : lilianricaud > Minga',
-      link: '#lilianricaud/Minga/tree/master',
-      label: 'Lilian Ricaud',
-      owner: 'lilianricaud',
-      repo: 'Minga'
+      title: 'Réseau Transition BE',
+      link: '#reseautransitionwb/reseau_transition/tree/master/contributions',
+      label: 'Réseau Transition BE',
+      owner: 'reseautransitionwb',
+      repo: 'reseau_transition'
+    }, {
+      title: 'Réseau Coop-tic',
+      link: '#supagroflorac/cooptic/tree/master/contributions',
+      label: 'Coop-TIC',
+      owner: 'supagroflorac',
+      repo: 'cooptic'
+    }, {
+      title: 'Réseau Transition BE',
+      link: '#reseautransitionwb/reseau_transition/contributions/Ingrédients',
+      label: 'The Transition Network',
+      owner: 'reseautransitionwb',
+      repo: 'contributions'
+    }, {
+      title: 'Centre pratiques coopération',
+      link: '#multibao/contributions/tree/master/contributions/cpcoop',
+      label: 'CPCOOP',
+      owner: 'multibao',
+      repo: 'contributions'
+    }, {
+      title: 'Traducteurs agiles',
+      link: '#les-traducteurs-agiles/les-traducteurs-agiles.github.io/tree/master/_posts',
+      label: 'Traducteurs agiles',
+      owner: 'les-traducteurs-agiles',
+      repo: 'les-traducteurs-agiles.github.io'
+    }, {
+      title: 'Chiendent',
+      link: '#multibao/contributions/tree/master/contributions/chiendent',
+      label: 'Collectif Chiendent',
+      owner: 'multibao',
+      repo: 'contributions'
+    }, {
+      title: 'Onpassealacte',
+      link: '#onpassealacte/videos_initiatives/tree/master/',
+      label: 'Onpassealacte',
+      owner: 'onpassealacte',
+      repo: 'videos_initiatives'
     }
   ]})
 /**
@@ -62,10 +85,10 @@ const dataRepositories = () =>
  * @param {String} An HTML string representing a github Url contribution.
  *
  */
-const injectRepositories = (ghUrl) => {
+const injectRepositories = () => {
   // const
   document.querySelector('#gh-repo-list').innerHTML =
     tplRepositories(dataRepositories())
-  selectedRepositories(ghUrl)
+  selectedRepositories(router.params)
 }
 
