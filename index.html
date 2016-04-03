@@ -2,12 +2,14 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="daktary.css">
-    <link rel="stylesheet" href="layout-repositories.css">
-    <link rel="stylesheet" href="layout-viewer.css">
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="/daktary.css">
+    <link rel="stylesheet" href="/layout-repositories.css">
+    <link rel="stylesheet" href="/layout-viewer.css">
     <script src="/config.js"></script>
-    <script src="/lib/daktary.js"></script>
+    <script src="/lib/dk-githubUrl.js"></script>
+    <script src="/lib/dk-router.js"></script>
+    <script src="/routes.js"></script>
     <script src="/layout-repositories.js"></script>
     <script src="/layout-viewer.js"></script>
     <script src="/component-search.js"></script>
@@ -16,30 +18,33 @@
     <script src="/component-ressources.js"></script>
     <script src="/component-contribution.js"></script>
     <script>
-      if (! navigator.onLine) {
-        window.location = './503.html'
-      }
       window.onhashchange = () => window.location.reload(true)
     </script>
     <script>
+      router.route(':owner/:repo/blob/:branch/:path(.*)', function () {
+        this.currentRoute = 'blob'
+      })
+      router.route(':owner/:repo/tree/:branch/:path(.*)?', function () {
+        this.currentRoute = 'tree'
+      })
+      router.route(':owner/:repo', function () {
+        this.currentRoute = 'repo'
+      })
+    </script>
+    <script>
       const ghUrl = window.location.toString().split('#')[1] ||
-        'multibao/contributions/tree/master/contributions'
-      const githubUrl = new GithubUrl(ghUrl)
-      if (! githubUrl.isValid) {
+        'multibao/contributions/tree/master/pages'
+      router.go(ghUrl)
+
+      if (router.isNoRoute()) {
         window.location = './404.html'
       }
       window.onload = () => {
-        if (githubUrl.checkGhTree()) {
+        if (router.currentRoute === 'tree') {
           injectLayoutRepos()
-          injectSearch(ghUrl)
-          injectRepositories(ghUrl)
-          injectBreadcrumb(ghUrl)
-          injectRessources(ghUrl)
         }
-        if (githubUrl.checkGhBlob()) {
+        if (router.currentRoute === 'blob') {
           injectLayoutViewer()
-          injectContribution(ghUrl)
-          injectParentRepo(ghUrl)
         }
       }
     </script>
