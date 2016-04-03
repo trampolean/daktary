@@ -16,11 +16,11 @@ const tplSearch = () =>
  *
  * @param {String} An HTML string representing a github Url contribution.
  */
-const eventsSearch = (ghUrl) =>
+const eventsSearch = () =>
   document.querySelector('#button-gh-search').addEventListener('click',
     (evt) => {
       const userQuery = document.querySelector('#gh-search').value
-      injectSearchRessources(ghUrl, userQuery)
+      injectSearchRessources(userQuery)
     })
 /**
  * Inject HTML code in #search-engine-wrapper tag.
@@ -28,7 +28,7 @@ const eventsSearch = (ghUrl) =>
  * @param {String} An HTML string representing a github Url contribution.
  *
  */
-const injectSearch = (ghUrl) => {
+const injectSearch = () => {
   document.querySelector('#search-engine-wrapper').innerHTML = tplSearch()
-  eventsSearch(ghUrl)
+  eventsSearch()
 }
