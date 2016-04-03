@@ -12,19 +12,21 @@ Tests unitaires :
 * [Expect](https://github.com/Automattic/expect.js)
 
 ## À prévoir
-* installer travis
-* CNAME
-* Select dans la liste de repo
+* Travis
 * Classement des dossiers
 * Liens après un fork
 * Home
 * Nombre de contributions
 * Notifications
 * vrai SLA
-* Créer une gestion Template
+* Template
+* Meta-Data : Contribs - Repos - Folders
+* Repos list
 
 ## Discussion intégration
 * class ou id
+* infinite scroll
+* loading
 
 ## Pour tester le site en local
 ```bash
