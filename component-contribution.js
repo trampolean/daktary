@@ -19,7 +19,7 @@ const dataContribution = ({owner, repo, branch, path}, callback) => {
    *
    */
 const injectContribution = () => {
-  dataContribution(router.parameters,
+  dataContribution(router.params,
     (html) => document.querySelector('#contribution').innerHTML = html)
 }
 /**
