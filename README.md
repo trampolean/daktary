@@ -1,4 +1,4 @@
-# daktary-team
+# Daktary
 
 ## Technologies
 
@@ -26,8 +26,8 @@ Tests unitaires :
 
 ## Pour tester le site en local
 ```bash
-$ git clone git@github.com:daktary-team/daktary-team.git .
-$ cd daktary-team
+$ git clone git@github.com:daktary-team/daktary.git .
+$ cd daktary
 ```
 
 ## Serveur local
@@ -41,5 +41,5 @@ $ http-server -p 8000
 ```
 
 ## Pour lancer les tests
-Dans un [Firefox](https://www.mozilla.org/fr/firefox/developer/) récent lancer :
+Dans un [Firefox](https://www.mozilla.org/fr/firefox/developer/) **récent** lancer :
 http://127.0.0.1:8000/tests
