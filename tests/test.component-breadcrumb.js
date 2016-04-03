@@ -7,8 +7,15 @@ describe('#Breadcrumb', () => {
     })
     expect(breadcrumb).to.contain('>Arto le Momo</a>')
   }),
-  it('should compose an object data with a github Url.', () => {
-    const breadcrumb = dataBreadcrumb('daktary/contribs/blob/master/ex/test.md')
-    expect(breadcrumb.repo.label).to.be.equal('contribs')
+  it('should retrieve label for the repo.', () => {
+    const breadcrumb = dataBreadcrumb(
+      {owner: 'dktr', repo: 'Yop', branch: 'master', path: 'win/dev.php'})
+    expect(breadcrumb.repo.label).to.be.equal('Yop')
+  })
+  it('should retrieve folders.', () => {
+    const breadcrumb = dataBreadcrumb(
+      {owner: 'dktr', repo: 'Yop', branch: 'master', path: 'win/dev'})
+    expect(breadcrumb.folders[1].link).to.be
+      .equal('/#dktr/Yop/tree/master/win/dev')
   })
 })
