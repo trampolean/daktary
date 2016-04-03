@@ -1,0 +1,32 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mocha Tests</title>
+  <link href="../vendors/mocha/mocha.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="../vendors/expect/index.js"></script>
+  <script src="../vendors/mocha/mocha.js"></script>
+  <script>mocha.setup('bdd')</script>
+
+  <script src="../config.js"></script>
+  <!-- Test the main lib -->
+  <script src="../lib/dk-githubUrl.js"></script>
+  <script src="../lib/dk-router.js"></script>
+  <script src="test.dk-githubUrl.js"></script>
+  <script src="test.dk-router.js"></script>
+  <!-- Test the viewer -->
+  <script src="../component-contribution.js"></script>
+  <script src="test.component-contribution.js"></script>
+  <!-- Test the repos -->
+  <script src="../component-repositories.js"></script>
+  <script src="test.component-repositories.js"></script>
+  <script src="../component-breadcrumb.js"></script>
+  <script src="test.component-breadcrumb.js"></script>
+  <script>
+    mocha.checkLeaks()
+    mocha.run()
+  </script>
+</body>
+</html>
