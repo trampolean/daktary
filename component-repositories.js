@@ -54,23 +54,11 @@ const dataRepositories = () =>
       owner: 'reseautransitionwb',
       repo: 'contributions'
     }, {
-      title: 'Centre pratiques coopération',
-      link: '#multibao/contributions/tree/master/contributions/cpcoop',
-      label: 'CPCOOP',
-      owner: 'multibao',
-      repo: 'contributions'
-    }, {
       title: 'Traducteurs agiles',
       link: '#les-traducteurs-agiles/les-traducteurs-agiles.github.io/tree/master/_posts',
       label: 'Traducteurs agiles',
       owner: 'les-traducteurs-agiles',
       repo: 'les-traducteurs-agiles.github.io'
-    }, {
-      title: 'Chiendent',
-      link: '#multibao/contributions/tree/master/contributions/chiendent',
-      label: 'Collectif Chiendent',
-      owner: 'multibao',
-      repo: 'contributions'
     }, {
       title: 'Onpassealacte',
       link: '#onpassealacte/videos_initiatives/tree/master/',
