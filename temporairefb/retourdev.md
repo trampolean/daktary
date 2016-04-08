@@ -6,7 +6,7 @@ Tests semaine du 4 au 10 avril 2016
 
 Fonctionnalité testée     |   Retours
 --------|------
-Lire une fiche en markdown  |   Ok, sauf si nom fichier ne respectant pas la charte de nommage ou déposée dans un dossier de 2e niveau
+Lire une fiche en markdown  |   Ok, sauf si nom fichier ne respectant pas la charte de nommage
 Lire une fiche en yml, css  |   Ok, sauf si nom fichier ne respectant pas la charte de nommage
 
 ## Relatifs à la création et modifications de ressources
@@ -34,8 +34,8 @@ http://multibao.org/#**orga/repo**/tree/master/**nomfiche.md**  |    Fonctionnel
 http://multibao.org/#**user/repo**/tree/master/**nomfiche.md**  |    Fonctionnel
 http://multibao.org/#**orga/repo**/tree/master/**dossier/nomfiche.md** |    Fonctionnel
 http://multibao.org/#**user/repo**/tree/master/**dossier/nomfiche.md**  |    Fonctionnel
-http://multibao.org/#**orga/repo**/tree/master/**dossier/dossier/nomfiche.md** |    Redirige vers une page 404., comme en démo: dev.multibao.org/#multibao/contributions/blob/master/financements/subventions_2016/0-lisez-moi.md. 
-http://multibao.org/#**user/repo**/tree/master/**dossier/dossier/nomfiche.md**  |    Redirige vers une page 404.
+http://multibao.org/#**orga/repo**/tree/master/**dossier/dossier/nomfiche.md** |    Redirige parfois vers une page 404., comme en démo: dev.multibao.org/#multibao/contributions/blob/master/financements/subventions_2016/0-lisez-moi.md.  Je cherche pourquoi.
+http://multibao.org/#**user/repo**/tree/master/**dossier/dossier/nomfiche.md**  |    Redirige parfois vers une page 404, mais pas toujours. Je cherche pourquoi.
 
 ## Relatifs à la navigation 
 
