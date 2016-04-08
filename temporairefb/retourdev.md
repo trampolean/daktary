@@ -19,6 +19,8 @@ http://multibao.org/#**user/repo**/tree/master/**dossier/dossier/nomfiche.md**  
 
 ### Relatif à la lecture des fiches 
 
+Fonctionnalité testée     |   Retours
+--------|------
 Lire une fiche en markdown  |   Ok, sauf si nom fichier ne respectant pas la charte de nommage ou déposée dans un dossier de 2e niveau
 Lire une fiche en yml, css  |   Ok, sauf si nom fichier ne respectant pas la charte de nommage
 
@@ -27,7 +29,7 @@ Lire une fiche en yml, css  |   Ok, sauf si nom fichier ne respectant pas la cha
 Fonctionnalité testée     |   Retours
 --------|------
 Naviguer dans la partie gauche: ouvrir organisations  |   Ok, sauf si nom de repo ne respectant pas la charte de nommage 
-Naviguer dans le breadcrum  |   Top! Pour le niveau orga & user renvoie vers github.com. Je réfléchis à la valeur de le laisser ou non.
+Naviguer dans le breadcrum  |   Pour les orgas spécifiées dans daktary, fonctionne. Pour les orgas et fiches testées en les renseignant dans le lien hypertexte, ne fonctionne pas. Démo: http://dev.multibao.org/#scopyleft/trampolean/tree/master/pour-incubateurs/index.html
 
 ## Relatifs à la création et modifications de ressources
 
@@ -47,7 +49,7 @@ Editer une fiche: commiter  |   Ok
 Navigateurs     |   Retours
 --------|------
 Firefox 45.0 (Ubuntu)  |   Fonctionnel
-Firefox 45.0.1 (Ubuntu)  |   Fonctionnel
+Firefox 45.0.1 (Windows)  |   Fonctionnel
 Internet Explorer v 11.162 (Windows)  |   Page blanche
 Google Chome 49.0.2623.112 (Windows) | Fonctionnel
 
