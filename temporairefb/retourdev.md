@@ -4,20 +4,18 @@ Tests semaine du 4 au 10 avril 2016
 
 ## Relatifs à l'utilsateur du routeur
 
-### Dépôts liés à une organisation et/ou un utilisateur
-
-Cas de figure     |   Retours
+En renseignant [...] dans la barre hypertexte      |   j'obtiens le résultat suivant
 --------|------
-Faire apparaître les contenus d'un repo spécifié dans barre recherche > http://multibao.org/#**orga/repo**/tree/master  |    Dysfonctionnel pour repos comme en démo: dev.multibao.org/#multibao/documentation/tree/master. Fonctionne pour les repos spécifiés par daktary. Je continue de chercher pourquoi.
-Faire apparaître les contenus d'un repo spécifié dans barre recherche > http://multibao.org/#**user/nomrepo**/tree/master  |    Dysfonctionnel comme en démo: dev.multibao.org/#alecoz/democracy-story/tree/master
-Faire apparaître les contenus d'un dossier de 1er niveau spécifié dans barre recherche > http://multibao.org/#**org/nomrepo**/tree/master/**dossier**  |    Dysfonctionnel, comme en démo: http://dev.multibao.org/#alecoz/democratie_ouverte/tree/master/contributions; la liste des fiches n'apparait pas
-Faire apparaître les contenus d'un dossier de 1er niveau spécifié dans barre recherche > http://multibao.org/#**user/nomrepo**/tree/master/**dossier**  |    Dysfonctionnel, la liste des fiches n'apparaît pas
-Faire apparaître une fiche en spécifiant dans barre de recherche > http://multibao.org/#**orga/nomrepo**/tree/master/**nomfiche.md**  |    Fonctionnel
-Faire apparaître une fiche en spécifiant dans barre de recherche > http://multibao.org/#**user/repo**/tree/master/**nomfiche.md**  |    Fonctionnel
-Faire apparaître une fiche en spécifiant dans barre de recherche > http://multibao.org/#**orga/repo**/tree/master/**dossier/nomfiche.md** |    Fonctionnel
-Faire apparaître une fiche en spécifiant dans barre de recherche > http://multibao.org/#**user/repo**/tree/master/**dossier/nomfiche.md**  |    Fonctionnel
-Faire apparaître une fiche en spécifiant dans barre de recherche > http://multibao.org/#**orga/repo**/tree/master/**dossier/dossier/nomfiche.md** |    Dysfonctionnel, comme en démo: dev.multibao.org/#multibao/contributions/blob/master/financements/subventions_2016/0-lisez-moi.md. Redirige vers une page 404.
-Faire apparaître une fiche en spécifiant dans barre de recherche > http://multibao.org/#**user/repo**/tree/master/**dossier/dossier/nomfiche.md**  |    Dysfonctionnel, redirige vers une page 404.
+http://multibao.org/#**orga/repo**/tree/master  |    Dysfonctionnel pour repos comme en démo: dev.multibao.org/#multibao/documentation/tree/master. Fonctionne pour les repos spécifiés par daktary. Je continue de chercher pourquoi.
+http://multibao.org/#**user/repo**/tree/master  |    Dysfonctionnel comme en démo: dev.multibao.org/#alecoz/democracy-story/tree/master
+http://multibao.org/#**org/repo**/tree/master/**dossier**  |    Dysfonctionnel, comme en démo: http://dev.multibao.org/#alecoz/democratie_ouverte/tree/master/contributions; la liste des fiches n'apparait pas
+http://multibao.org/#**user/repo**/tree/master/**dossier**  |    Dysfonctionnel, la liste des fiches n'apparaît pas
+http://multibao.org/#**orga/repo**/tree/master/**nomfiche.md**  |    Fonctionnel
+http://multibao.org/#**user/repo**/tree/master/**nomfiche.md**  |    Fonctionnel
+http://multibao.org/#**orga/repo**/tree/master/**dossier/nomfiche.md** |    Fonctionnel
+http://multibao.org/#**user/repo**/tree/master/**dossier/nomfiche.md**  |    Fonctionnel
+http://multibao.org/#**orga/repo**/tree/master/**dossier/dossier/nomfiche.md** |    Dysfonctionnel, comme en démo: dev.multibao.org/#multibao/contributions/blob/master/financements/subventions_2016/0-lisez-moi.md. Redirige vers une page 404.
+http://multibao.org/#**user/repo**/tree/master/**dossier/dossier/nomfiche.md**  |    Dysfonctionnel, redirige vers une page 404.
 
 ### Relatif à la lecture des fiches 
 
