@@ -50,10 +50,14 @@ Utiliser le moteur de recherche  |   En cours de tests
 
 Navigateurs     |   Retours
 --------|------
-Firefox 45.0 (Ubuntu)  |   Fonctionnel
-Firefox 45.0.1 (Windows)  |   Fonctionnel
-Internet Explorer v 11.162 (Windows)  |   Page blanche
-Google Chome 49.0.2623.112 (Windows) | Fonctionnel
+Firefox 45.0 (Ubuntu)  x5 |   Fonctionnel
+Firefox 45.0.1 (Windows) x2 |   Fonctionnel
+Internet Explorer v 11.162 (Windows) x1 |   Page blanche
+Google Chome 49.0.2623.112 (Windows) x2 | Fonctionnel
+Google Chome 49.0.2623.110 (Windows) x1 | Fonctionnel
+Chromium / Version 49.0.2623.108 (Ubuntu) x1 | Fonctionnel
+Chrome 47.0.2526.83 (Android) x1 |   Page blanche
+Android 5.0.2; LG-D620 Build/LRX22G x1 |   Page blanche
 
 
 
