@@ -43,6 +43,7 @@ Fonctionnalité testée     |   Retours
 --------|------
 Naviguer dans la partie gauche: ouvrir organisations  |   Ok, sauf si nom de repo ne respectant pas la charte de nommage 
 Naviguer dans le breadcrum  |   Pour les orgas spécifiées dans daktary, fonctionne. Pour les orgas et fiches testées en les renseignant dans le lien hypertexte, ne fonctionne pas. Démo: http://dev.multibao.org/#scopyleft/trampolean/tree/master/pour-incubateurs/index.html. Voir retours liés au routeur. 
+Utiliser le moteur de recherche  |   En cours de tests
 
 
 ## Relatifs aux navigateurs faisant apparaitre http://dev.multibao.org
