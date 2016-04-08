@@ -2,14 +2,23 @@
 
 Tests semaine du 4 au 10 avril 2016
 
-## Relatifs à lecture
+## Relatifs à l'utilsateur du routeur
 
-Fonctionnalité testée     |   Retours
+### Dépôts liés à une organisation et/ou un utilisateur
+
+Cas de figure     |   Retours
 --------|------
-Lire une fiche à partir du 2eme niveau de dossier  |    Dysfonctionnel, voir [cette fiche](https://github.com/multibao/contributions/blob/master/financements/subventions_2016/0-lisez-moi.md) qui n'apparait pas sur [dev.multibao.org](dev.multibao.org/#multibao/contributions/blob/master/financements/subventions_2016/0-lisez-moi.md)
+Faire apparaître les contenus d'un repo spécifié dans barre recherche > http://multibao.org/#**orga/repo**/tree/master  |    Dysfonctionnel pour repos comme en démo: dev.multibao.org/#multibao/documentation/tree/master. Fonctionne pour les repos spécifiés par daktary. Je continue de chercher pourquoi.
+Faire apparaître les contenus d'un repo spécifié dans barre de recherche > http://multibao.org/#**user/nomrepo**/tree/master  |    Dysfonctionnel comme en démo: dev.multibao.org/#alecoz/democracy-story/tree/master
+Faire apparaître une fiche en spécifiant dans la barre de recherche > http://multibao.org/#nomorga/nomrepo/tree/master/nomfiche.md  |    Fonctionnel
+Faire apparaître une fiche en spécifiant dans la barre de recherche > http://multibao.org/#**orga/repo**/tree/master/1er niveau dossier/nomfiche.md  |    Fonctionnel
+Faire apparaître une fiche en spécifiant dans la barre de recherche > http://multibao.org/#**user/repo**/tree/master/nomfiche.md  |    Fonctionnel
+Faire apparaître une fiche en spécifiant dans la barre de recherche > http://multibao.org/#**user/repo**/tree/master/1er niveau dossier/nomfiche.md  |    Fonctionnel
+
+### Relatif à la lecture des fiches 
+
 Lire une fiche en markdown  |   Ok, sauf si nom fichier ne respectant pas la charte de nommage
 Lire une fiche en yml, css  |   Ok, sauf si nom fichier ne respectant pas la charte de nommage
-Reconnaître une fiche d'un dossier   |   Incapacité à reconnaître une fiche d'un dossier
 
 ## Relatifs à la navigation 
 
