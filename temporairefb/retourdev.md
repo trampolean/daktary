@@ -6,6 +6,7 @@ Tests semaine du 4 au 10 avril 2016
 
 Fonctionnalité testée     |   Retours
 --------|------
+Lire une fiche à partir du 2eme niveau de dossier  |    Dysfonctionnel, voir [cette fiche](https://github.com/multibao/contributions/blob/master/financements/subventions_2016/0-lisez-moi.md) qui n'apparait pas sur [dev.multibao.org](dev.multibao.org/#multibao/contributions/blob/master/financements/subventions_2016/0-lisez-moi.md)
 Lire une fiche en markdown  |   Ok, sauf si nom fichier ne respectant pas la charte de nommage
 Lire une fiche en yml, css  |   Ok, sauf si nom fichier ne respectant pas la charte de nommage
 Reconnaître une fiche d'un dossier   |   Incapacité à reconnaître une fiche d'un dossier
