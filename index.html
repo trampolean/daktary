@@ -19,32 +19,12 @@
     <script src="/component-contribution.js"></script>
     <script>
       window.onhashchange = () => window.location.reload(true)
-    </script>
-    <script>
-      router.route(':owner/:repo/blob/:branch/:path(.*)', function () {
-        this.currentRoute = 'blob'
-      })
-      router.route(':owner/:repo/tree/:branch/:path(.*)?', function () {
-        this.currentRoute = 'tree'
-      })
-      router.route(':owner/:repo', function () {
-        this.currentRoute = 'repo'
-      })
-    </script>
-    <script>
-      const ghUrl = window.location.toString().split('#')[1] ||
-        'multibao/contributions/tree/master/pages'
-      router.go(ghUrl)
-
-      if (router.isNoRoute()) {
-        window.location = './404.html'
-      }
       window.onload = () => {
-        if (router.currentRoute === 'tree') {
-          injectLayoutRepos()
-        }
-        if (router.currentRoute === 'blob') {
-          injectLayoutViewer()
+        const ghUrl = window.location.toString().split('#')[1] ||
+          'multibao/contributions/tree/master/pages'
+        router.go(ghUrl)
+        if (router.isNoRoute()) {
+          window.location = './404.html'
         }
       }
     </script>

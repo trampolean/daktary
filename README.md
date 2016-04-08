@@ -1,5 +1,7 @@
 # Daktary
 
+Pré-prod : http://dev.multibao.org
+
 ## Technologies
 
 Langages :
@@ -10,19 +12,19 @@ Tests unitaires :
 * [Expect](https://github.com/Automattic/expect.js)
 
 ## À prévoir
-* installer travis
-* CNAME
-* Select dans la liste de repo
+* Travis
 * Classement des dossiers
 * Liens après un fork
 * Home
 * Nombre de contributions
 * Notifications
 * vrai SLA
-* Créer une gestion Template
-
-## Discussion intégration
-* class ou id
+* Template
+* Meta-Data : Contribs - Repos - Folders
+* Repos list
+* Cacher autres que .md
+* Loading
+* Infinite scroll
 
 ## Pour tester le site en local
 ```bash
@@ -43,3 +45,22 @@ $ http-server -p 8000
 ## Pour lancer les tests
 Dans un [Firefox](https://www.mozilla.org/fr/firefox/developer/) **récent** lancer :
 http://127.0.0.1:8000/tests
+
+## Intégration
+* Affichage repo
+* Affichage folder
+* Affichage ressources
+* Bouton recherche avec entrée
+* Résultats recherche : nombre (en dur)
+* Résultats recherche : afficher ou non la requète
+* Résultats recherche : cacher breadcrumbs
+* Résultats recherche : afficher repo où a été effectué la recherche
+* Espace manquant breadcrumbs
+* Affichage champs recherche grand
+* Changer "Liste des repos" 
+* Meta : semantique + affichage
+* Affichage fiches (typo, justified text)
+* Fiche : liens -> couleurs, title hover
+* Responsive : mobile first ?
+
+## Discussion intégration
