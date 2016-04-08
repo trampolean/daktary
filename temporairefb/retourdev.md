@@ -30,13 +30,14 @@ Editer une fiche: renseigner les metadatas  |   Ok et top: n'apparaissent pas da
 Editer une fiche: renseigner des notes de bas de page  |   Non fonctionnel: les notes renvoient vers dev.multibao.org/#note qui renvoie vers une page d'erreur 404.
 Editer une fiche: commiter  |   Ok
 
-## Relatifs aux moteurs de recherche faisant apparaitre http://dev.multibao.org
+## Relatifs aux navigateurs faisant apparaitre http://dev.multibao.org
 
-Moteurs de recherche     |   Retours
+Navigateurs     |   Retours
 --------|------
 Firefox 45.0 (Ubuntu)  |   Fonctionnel
 Firefox 45.0.1 (Ubuntu)  |   Fonctionnel
 Internet Explorer v 11.162 (Windows)  |   Page blanche
+Google Chome 49.0.2623.112 (Windows) | Fonctionnel
 
 
 
