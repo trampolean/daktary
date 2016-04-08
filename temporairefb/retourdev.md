@@ -57,7 +57,6 @@ Google Chome 49.0.2623.112 (Windows) x2 | Fonctionnel
 Google Chome 49.0.2623.110 (Windows) x1 | Fonctionnel
 Chromium / Version 49.0.2623.108 (Ubuntu) x1 | Fonctionnel
 Chrome 47.0.2526.83 (Android) x1 |   Page blanche
-Android 5.0.2; LG-D620 Build/LRX22G x1 |   Page blanche
 Safari Version 9.1 (10601.5.17.4) x1 |   Page blanche
 
 
