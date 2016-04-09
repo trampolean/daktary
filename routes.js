@@ -11,4 +11,5 @@ router.route(':owner/:repo/tree/:branch/:path(.*)?', function () {
 })
 router.route(':owner/:repo', function () {
   this.currentRoute = 'repo'
+  this.injectLayout = injectLayoutRepos
 })
