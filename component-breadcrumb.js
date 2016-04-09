@@ -12,7 +12,7 @@ const tplBreadcrumb = data =>
   `<ul>
      <li><a href="/">Accueil</a></li>
      <li><a href="${data.owner.link}">${data.owner.label}</a></li>
-     <li><a href="${data.repo.link}">${data.repo.label}</a></li>` +
+     ${data.repo.label ? `<li><a href="${data.repo.link}">${data.repo.label}</a></li>` : ''}` +
      data.folders.map(folder =>
       `<li><a href="${folder.link}">${folder.label}</a></li>`
      ).join('\n') +
@@ -39,7 +39,7 @@ const dataBreadcrumb = ({owner, repo, branch, path}) => {
   return {
     owner: {
       label: owner,
-      link: `//github.com/${owner}`
+      link: `/#${owner}`
     },
     repo: {
       label: repo,
