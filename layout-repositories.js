@@ -10,8 +10,8 @@ const tplLayoutRepos = () => `
     </div>
   </header>
   <aside>
-    <h3>Liste des repos</h3>
-    <div id="gh-repo-list">
+    <h3>Liste des collectifs</h3>
+    <div id="gh-crew-list">
       <!-- from component-repositories.js -->
     </div>
   </aside>
@@ -30,8 +30,12 @@ const tplLayoutRepos = () => `
  */
 const injectLayoutRepos = (ghUrl) => {
   document.querySelector('#container').innerHTML = tplLayoutRepos()
-  injectSearch(ghUrl)
-  injectRepositories(ghUrl)
-  injectBreadcrumb(ghUrl)
-  injectRessources(ghUrl)
+  injectSearch()
+  injectCrews()
+  injectBreadcrumb()
+  if (router.currentRoute === 'repos') {
+    injectRepositories()
+  } else {
+    injectRessources()
+  }
 }
