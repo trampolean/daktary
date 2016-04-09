@@ -41,7 +41,7 @@ const tplParentRepo = data =>
  */
 const dataParentRepo = ({owner, repo, branch, path}) => {
   const urlParentRepo = `/#${owner}/${repo}/tree/${branch}/` +
-    `${path.replace(/(\/|)[A-Za-z\u00C0-\u017F+\-\_]*[.]md$/, '')}`
+    `${path.replace(/(\/|)[0-9A-Za-z\u00C0-\u017F\-\_\.]*$/, '')}`
   return {link: urlParentRepo, label: `${owner} - ${repo}`}
 }
 /**

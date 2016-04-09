@@ -36,7 +36,7 @@ describe('#Router', () => {
     router.route(':owner/:repo/blob/:branch/:path(.*)', function () {
       this.currentRoute = 'blob'
     })
-    router.go('les-traducteurs-agiles/les-traducteurs-agiles.github.io/blob/master/_posts/2014-06-19-coder-en-taule.markdown')
+    router.go('che-mical/warp/blob/master/_posts/2014-coder-en-taule.markdown')
     expect(router.currentRoute).to.be('blob')
   }),
   it('should return tree for github tree url without path', () => {
