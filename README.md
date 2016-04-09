@@ -62,5 +62,6 @@ http://127.0.0.1:8000/tests
 * Affichage fiches (typo, justified text)
 * Fiche : liens -> couleurs, title hover
 * Responsive : mobile first ?
+* notification : ex. aucune fiche trouvée
 
 ## Discussion intégration
