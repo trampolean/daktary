@@ -10,6 +10,10 @@ router.route(':owner/:repo/tree/:branch/:path(.*)?', function () {
   this.injectLayout = injectLayoutRepos
 })
 router.route(':owner/:repo', function () {
-  this.currentRoute = 'repo'
+  this.currentRoute = 'list'
+  this.injectLayout = injectLayoutRepos
+})
+router.route(':owner', function () {
+  this.currentRoute = 'repos'
   this.injectLayout = injectLayoutRepos
 })
