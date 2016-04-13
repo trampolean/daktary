@@ -11,10 +11,10 @@
 const tplBreadcrumb = data =>
   `<ul>
      <li><a href="/">Accueil</a></li>
-     <li><a href="${data.owner.link}">${data.owner.label}</a></li>
-     ${data.repo.label ? `<li><a href="${data.repo.link}">${data.repo.label}</a></li>` : ''}` +
+     <li><a href="./${data.owner.link}">${data.owner.label}</a></li>
+     ${data.repo.label ? `<li><a href="./${data.repo.link}">${data.repo.label}</a></li>` : ''}` +
      data.folders.map(folder =>
-      `<li><a href="${folder.link}">${folder.label}</a></li>`
+      `<li><a href="./${folder.link}">${folder.label}</a></li>`
      ).join('\n') +
    `</ul>`
 
@@ -31,7 +31,7 @@ const dataBreadcrumb = ({owner, repo, branch, path}) => {
     path.split('/').map(elt => {
       pathByFolder.push(`/${elt}`)
       folders.push({
-        link: `/#${owner}/${repo}/tree/${branch}${pathByFolder.join('')}`,
+        link: `#${owner}/${repo}/tree/${branch}${pathByFolder.join('')}`,
         label: elt
       })
     })
@@ -39,11 +39,11 @@ const dataBreadcrumb = ({owner, repo, branch, path}) => {
   return {
     owner: {
       label: owner,
-      link: `/#${owner}`
+      link: `#${owner}`
     },
     repo: {
       label: repo,
-      link: `/#${owner}/${repo}/tree/${branch}`
+      link: `#${owner}/${repo}/tree/${branch}`
     },
     folders: folders
   }
