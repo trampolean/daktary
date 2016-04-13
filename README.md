@@ -25,6 +25,7 @@ Tests unitaires :
 * Cacher autres que .md
 * Loading
 * Infinite scroll
+* Ressources : réponses not found => 404
 
 ## Pour tester le site en local
 ```bash
