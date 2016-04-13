@@ -25,6 +25,7 @@ Tests unitaires :
 * Cacher autres que .md
 * Loading
 * Infinite scroll
+* Ressources : réponses not found => 404
 
 ## Pour tester le site en local
 ```bash
@@ -63,5 +64,7 @@ http://127.0.0.1:8000/tests
 * Fiche : liens -> couleurs, title hover
 * Responsive : mobile first ?
 * notification : ex. aucune fiche trouvée
+
+* Simplify tests writes merge on async
 
 ## Discussion intégration

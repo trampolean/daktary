@@ -1,10 +1,16 @@
-describe('#Breadcrumb', () => {
-  it('should create an html list with data injection.', () => {
-    const breadcrumb = tplBreadcrumb({
-      owner: {label: 'Antonin Artaud', link: 'http://daktary.com'},
-      repo: {label: 'Théatre', link: 'http://multibao.org'},
-      folders: [{label: 'Arto le Momo', link: 'http://antonio'}]
+describe('#Ressources', () => {
+  it('should build a ressources collection for Url Github ressources.',
+    (done) => {
+      dataRessources({
+        owner: 'daktary-team',
+        repo: 'daktary',
+        branch: 'master',
+        path: 'tests'
+      }, data => {
+        expect(data).to.be.an('array')
+        expect(data[0]).to.be.an('object')
+        expect(data[0]).to.have.property('git_url')
+        done()
+      })
     })
-    expect(breadcrumb).to.contain('>Arto le Momo</a>')
-  })
 })
