@@ -64,4 +64,6 @@ http://127.0.0.1:8000/tests
 * Responsive : mobile first ?
 * notification : ex. aucune fiche trouvée
 
+* Simplify tests writes merge on async
+
 ## Discussion intégration
