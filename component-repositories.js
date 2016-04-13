@@ -11,7 +11,7 @@
 const tplRepositories = (data) =>
   data.repositories.map(({name, url, git_url}) =>
     `<article class="gh-list-item gh-type-repo">
-       <h2 class="gh-list-title"><a href="${url}">${name}</a></h2>
+       <h2 class="gh-list-title"><a href="./${url}">${name}</a></h2>
        <div class="gh-list-meta">
          <p>Mis à jour le : 02/02/16</p>
          <p>Créé par : <a href="">pntbr</a> / Contributeurs les plus actifs :

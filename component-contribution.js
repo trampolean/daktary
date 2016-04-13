@@ -31,7 +31,7 @@ const injectContribution = () => {
  * @result {String} A string representing an html link.
  */
 const tplParentRepo = data =>
-  `À retrouver dans le dépôt : <a href="${data.link}">${data.label}</a>`
+  `À retrouver dans le dépôt : <a href="./${data.link}">${data.label}</a>`
 
 /**
  * Create data for parent repository using a github blobs Url.
@@ -40,7 +40,7 @@ const tplParentRepo = data =>
  * @result {Object} A object with label and link to parent repository.
  */
 const dataParentRepo = ({owner, repo, branch, path}) => {
-  const urlParentRepo = `/#${owner}/${repo}/tree/${branch}/` +
+  const urlParentRepo = `#${owner}/${repo}/tree/${branch}/` +
     `${path.replace(/(\/|)[0-9A-Za-z\u00C0-\u017F\-\_\.]*$/, '')}`
   return {link: urlParentRepo, label: `${owner} - ${repo}`}
 }
