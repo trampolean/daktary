@@ -8,23 +8,23 @@ const CREWS = {crews:
       owner: 'multibao'
     }, {
       title: 'Réseau Transition BE',
-      label: 'Réseau Transition BE',
+      label: 'association Réseau Transition Wallonie Bruxelles',
       owner: 'reseautransitionwb'
     }, {
       title: 'Réseau Coop-tic',
-      label: 'Coop-TIC',
+      label: 'associations Outils Réseaux (FR) et CRIE Mouscron (BE); établissement SupAgro Florac (FR)',
       owner: 'supagroflorac'
     }, {
       title: 'Captain Berrotte',
-      label: 'Captain Berrotte',
+      label: 'stagiaires travaillant sur multiBàO',
       owner: 'captain-berrotte'
     }, {
       title: 'Traducteurs agiles',
-      label: 'Traducteurs agiles',
+      label: 'Les Traducteurs Agiles sont une communauté d’Agilistes et de … Traducteurs.',
       owner: 'les-traducteurs-agiles'
     }, {
       title: 'Onpassealacte',
-      label: 'Onpassealacte',
+      label: 'Media web citoyen montrant des initiatives positives en vidéos',
       owner: 'onpassealacte'
     }
   ]}
