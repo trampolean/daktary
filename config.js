@@ -15,6 +15,10 @@ const CREWS = {crews:
       label: 'Coop-TIC',
       owner: 'supagroflorac'
     }, {
+      title: 'Captain Berrotte',
+      label: 'Captain Berrotte',
+      owner: 'captain-berrotte'
+    }, {
       title: 'Traducteurs agiles',
       label: 'Traducteurs agiles',
       owner: 'les-traducteurs-agiles'
