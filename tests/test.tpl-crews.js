@@ -1,4 +1,5 @@
-describe('#Repositories', () => {
+describe('#Crews', () => {
+  /*
   it('should add class selected to the current repo.', () => {
     const currentOwner = 'dktr'
     const repos = {repos: [
@@ -24,4 +25,5 @@ describe('#Repositories', () => {
     }])
     expect(repositories).to.contain('>daktary-contribs</a>')
   })
+  */
 })

@@ -1,23 +1,16 @@
-/**
- * Layout for display a Github ressource.
+ /**
+ * Layout for manage and display Github contribution.
  *
  */
-const tplLayoutViewer = () => `
+{
+  layout.new('viewer')
+  layout.viewer.html(`
   <main>
-    <div id="parentRepo" class="breadcrumbs">
-      <!-- from component-breadcrumb.js -->
+    <div id="parentRepo" class="breadcrumbs" data-template="parentRepo">
     </div>
-    <article id="contribution">
-      <!-- from component-contribution.js -->
+    <article data-template="contribution" id="contribution">
     </article>
-  </main>`
-
-/**
- * Inject HTML code in #container tag.
- *
- */
-const injectLayoutViewer = () => {
-  document.querySelector('#container').innerHTML = tplLayoutViewer()
-  injectContribution()
-  injectParentRepo()
+  </main>
+  `)
 }
+
