@@ -5,19 +5,9 @@
     <link rel="stylesheet" href="./reset.css">
     <link rel="stylesheet" href="./daktary.css">
     <link rel="stylesheet" href="./layout-repositories.css">
-    <link rel="stylesheet" href="./layout-viewer.css">
     <script src="./config.js"></script>
     <script src="./lib/dk-githubUrl.js"></script>
     <script src="./lib/dk-router.js"></script>
-    <script src="./routes.js"></script>
-    <script src="./layout-repositories.js"></script>
-    <script src="./layout-viewer.js"></script>
-    <script src="./component-search.js"></script>
-    <script src="./component-crews.js"></script>
-    <script src="./component-breadcrumb.js"></script>
-    <script src="./component-ressources.js"></script>
-    <script src="./component-repositories.js"></script>
-    <script src="./component-contribution.js"></script>
     <script>
       window.onhashchange = () => window.location.reload(true)
       window.onload = () => {
@@ -28,6 +18,37 @@
           window.location = './404.html'
         }
       }
+    </script>
+    <script src='./lib/dk-layout.js'></script>
+    <script src='./lib/dk-template.js'></script>
+    <script>
+      const template = new Template()
+      const layout = new Layout()
+    </script>
+    <script src="./layout-viewer.js"></script>
+    <script src="./layout-folders.js"></script>
+    <script src="./layout-repositories.js"></script>
+    <script src="./layout-searchList.js"></script>
+    <script src="./routes.js"></script>
+    <link rel="stylesheet" href="./tpl-contribution.css">"
+    <script src="./tpl-contribution.js"></script>
+    <link rel="stylesheet" href="./tpl-parentRepo.css">
+    <script src="./tpl-parentRepo.js"></script>
+    <link rel="stylesheet" href="../tpl-crews.css">
+    <script src="./tpl-crews.js"></script>
+    <link rel="stylesheet" href="./tpl-search.css">
+    <script src="./tpl-search.js"></script>
+    <link rel="stylesheet" href="./tpl-breadcrumb.css">
+    <script src="./tpl-breadcrumb.js"></script>
+    <link rel="stylesheet" href="./tpl-list.css">
+    <script src="./tpl-folders.js"></script>
+    <script src="./tpl-repos.js"></script>
+    <script src="./tpl-searchList.js"></script>
+    <script> window.onload = () => {
+      const ghUrl = window.location.toString().split('#')[1] ||
+        'multibao/contributions/tree/master/pages'
+      router.go(ghUrl)
+    }
     </script>
     <title>Multibao - apprendre des autres cultures.</title>
   </head>
