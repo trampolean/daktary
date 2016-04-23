@@ -20,11 +20,11 @@ class Lyt {
       if (! template.hasOwnProperty(tplName)) {
         throw `Template ${tplName} is undefined`
       }
-     return template[tplName].render()})
-    }
+      return template[tplName].render()
+    })}
 }
 class Layout {
-  new(name) {
+  create(name) {
     this[name] = new Lyt()
   }
 }

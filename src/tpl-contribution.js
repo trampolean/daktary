@@ -1,5 +1,5 @@
 {
-  template.new('contribution')
+  template.create('contribution')
 
   template.contribution.data = () => {
     const apiUrl = new GithubUrl(router.params).toGhApiUrl()

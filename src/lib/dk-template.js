@@ -43,7 +43,7 @@ class Tpl {
 }
 
 class Template {
-  new(name) {
+  create(name) {
     this[name] = new Tpl(name)
   }
 }
