@@ -18,7 +18,7 @@ class GithubUrl {
     }
   }
   toGhApiSearch(query) {
-    const {keys, owner} = this.ghData
+    const {owner} = this.ghData
     return `https://api.github.com/search/code` +
            `?q=${query}+language:Markdown+user:${owner}`
   }

@@ -3,8 +3,8 @@
  *
  */
 {
-  layout.new('folders')
-  layout.folders.html(`
+  layout.create('repos')
+  layout.repos.html(`
   <header>
     <h1>MultiBao</h1>
     <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">
@@ -18,7 +18,7 @@
   <main>
     <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">
     </div>
-    <section id="gh-list" class="gh-list" data-template="folders">
+    <section id="gh-list" class="gh-list" data-template="repos">
     </section>
   </main>`)
 }

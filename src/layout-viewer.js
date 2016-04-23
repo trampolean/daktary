@@ -3,7 +3,7 @@
  *
  */
 {
-  layout.new('viewer')
+  layout.create('viewer')
   layout.viewer.html(`
   <main>
     <div id="parentRepo" class="breadcrumbs" data-template="parentRepo">
