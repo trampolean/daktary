@@ -1,5 +1,5 @@
 {
-  template.new('parentRepo')
+  template.create('parentRepo')
 
   template.parentRepo.data = () => {
     const {owner, repo, branch, path} = router.params
@@ -9,6 +9,6 @@
       label: `${owner} - ${repo}`
     }
     template.parentRepo.html(
-      `À retrouver dans le dépôt : <a href="./${link}">${label}</a>`)
+      `À retrouver dans le dépôt : <a href="${link}">${label}</a>`)
   }
 }

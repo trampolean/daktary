@@ -1,5 +1,5 @@
 {
-  template.new('repos')
+  template.create('repos')
 
   template.repos.data = () => {
     const apiUrl = new GithubUrl(router.params).toGhRepoApiUrl()
@@ -10,14 +10,14 @@
           name: name,
           type: type,
           git_url: html_url,
-          url: `/#${html_url.match(/^https:\/\/github.com\/(.*)/)[1]}`
+          url: `${html_url.match(/^https:\/\/github.com\/(.*)/)[1]}`
         }))
         template.repos.html(
           ressources.map(({name, url, git_url}) =>
             `<article class="gh-list-item gh-type-repo">
-               <h2 class="gh-list-title"><a href="./${url}">${name}</a></h2>
+               <h2 class="gh-list-title"><a href="#${url}">${name}</a></h2>
                <div class="gh-list-meta">
-                 <p>Mis à jour le : 02/02/16</p>
+                 <p>Mis à jour : 02/02/16</p>
                  <p>Créé par : <a href="">pntbr</a> / Contributeurs les plus actifs :
                    <a href="">pntbr</a> / <a href="">wolffgang</a>
                  </p>
