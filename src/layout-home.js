@@ -2,7 +2,7 @@
   layout.create('home')
   layout.home.html(`
   <header class="clearfix">
-    <h1>multiBàO</h1>
+    <h1>multi<span>BàO</span></h1>
     <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">
     </div>
   </header>

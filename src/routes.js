@@ -1,6 +1,10 @@
 // Create a router
 const router = new Router()
 
+router.route('home', function () {
+  this.currentRoute = 'home'
+  layout.home.render()
+})
 router.route('search/code', function () {
   this.currentRoute = 'search'
   layout.searchList.render()

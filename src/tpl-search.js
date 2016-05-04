@@ -3,10 +3,9 @@
 
   template.search.data = () => {
     template.search.html(`
-      <h2>Recherche</h2>
       <div class="search-engine">
         <fieldset>
-          <input id="gh-search" type="text">
+          <input id="gh-search" type="text" placeholder="Recherche">
           <input id="button-gh-search" value="Rechercher" type="submit">
         </fieldset>
       </div>
