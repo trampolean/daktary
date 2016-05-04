@@ -8,19 +8,23 @@ var CREWS = { crews: [{ title: 'Bienvenue sur multiBàO',
     owner: 'multibao'
   }, {
     title: 'Réseau Transition BE',
-    label: 'Réseau Transition BE',
+    label: 'association Réseau Transition Wallonie Bruxelles',
     owner: 'reseautransitionwb'
   }, {
     title: 'Réseau Coop-tic',
-    label: 'Coop-TIC',
+    label: 'associations Outils Réseaux (FR) et CRIE Mouscron (BE); établissement SupAgro Florac (FR)',
     owner: 'supagroflorac'
   }, {
+    title: 'Captain Berrotte',
+    label: 'stagiaires travaillant sur multiBàO',
+    owner: 'captain-berrotte'
+  }, {
     title: 'Traducteurs agiles',
-    label: 'Traducteurs agiles',
+    label: 'Les Traducteurs Agiles sont une communauté d’Agilistes et de … Traducteurs.',
     owner: 'les-traducteurs-agiles'
   }, {
     title: 'Onpassealacte',
-    label: 'Onpassealacte',
+    label: 'Media web citoyen montrant des initiatives positives en vidéos',
     owner: 'onpassealacte'
   }] };
 /**
@@ -226,7 +230,7 @@ var Router = (function () {
     key: 'go',
     value: function go(url) {
       this._resetRoute();
-      this.url = url;
+      this.url = url || '/';
       this._findAndSetCurrentRoute();
       this.injectLayout();
     }
@@ -405,7 +409,7 @@ window.addEventListener('hashchange', function () {
   return window.location.reload(true);
 });
 window.addEventListener('load', function () {
-  var ghUrl = window.location.toString().split('#')[1] || 'multibao/contributions/tree/master/pages';
+  var ghUrl = window.location.toString().split('#')[1];
   router.go(ghUrl);
   if (router.isNoRoute()) {
     window.location = './404.html';
@@ -431,7 +435,7 @@ var layout = new Layout();
 
 {
   layout.create('folders');
-  layout.folders.html('\n  <header>\n    <h1>MultiBao</h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <aside>\n    <h3>Liste des collectifs</h3>\n    <div id="gh-crew-list" data-template="crews">\n    </div>\n  </aside>\n  <main>\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="folders">\n    </section>\n  </main>');
+  layout.folders.html('\n  <header>\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="folders">\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -441,7 +445,7 @@ var layout = new Layout();
 
 {
   layout.create('repos');
-  layout.repos.html('\n  <header>\n    <h1>MultiBao</h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <aside>\n    <h3>Liste des collectifs</h3>\n    <div id="gh-crew-list" data-template="crews">\n    </div>\n  </aside>\n  <main>\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="repos">\n    </section>\n  </main>');
+  layout.repos.html('\n  <header>\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="repos">\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -451,13 +455,17 @@ var layout = new Layout();
 
 {
   layout.create('searchList');
-  layout.searchList.html('\n  <header>\n    <h1>MultiBao</h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <aside>\n    <h3>Liste des collectifs</h3>\n    <div id="gh-crew-list" data-template="crews">\n    </div>\n  </aside>\n  <main>\n    <section id="gh-list" class="gh-list" data-template="searchList">\n    </section>\n  </main>');
+  layout.searchList.html('\n  <header>\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <section id="gh-list" class="gh-list" data-template="searchList">\n    </section>\n  </main>');
 }
 // Create a router
 'use strict';
 
 var router = new Router();
 
+router.route('/', function () {
+  this.currentRoute = 'home';
+  layout.home.render();
+});
 router.route('search/code', function () {
   this.currentRoute = 'search';
   layout.searchList.render();
@@ -552,7 +560,7 @@ template.crews.data = function () {
   template.create('search');
 
   template.search.data = function () {
-    template.search.html('\n      <h2>Recherche</h2>\n      <div class="search-engine">\n        <fieldset>\n          <input id="gh-search" type="text">\n          <input id="button-gh-search" value="Rechercher" type="submit">\n        </fieldset>\n      </div>\n    ');
+    template.search.html('\n      <div class="search-engine">\n        <fieldset>\n          <input id="gh-search" type="text" placeholder="Recherche">\n          <input id="button-gh-search" value="Rechercher" type="submit">\n        </fieldset>\n      </div>\n    ');
     template.search.events({
       'click #button-gh-search': function clickButtonGhSearch() {
         if (document.querySelector('#gh-search').value.length > 2) {
@@ -611,8 +619,8 @@ template.crews.data = function () {
     var repoTpl = _ownerTpl$repoTpl$foldersTpl.repoTpl;
     var foldersTpl = _ownerTpl$repoTpl$foldersTpl.foldersTpl;
 
-    template.breadcrumb.html('<ul>\n        <li><a href="/">Accueil</a></li>\n        <li><a href="' + ownerTpl.link + '">' + ownerTpl.label + '</a></li>\n        ' + (repoTpl.label ? '<li><a href="' + repoTpl.link + '">' + repoTpl.label + '</a></li>' : '') + foldersTpl.map(function (folder) {
-      return '<li><a href="' + folder.link + '">' + folder.label + '</a></li>';
+    template.breadcrumb.html('<ul>\n        <li><a href="/">Accueil</a></li><!--\n        --><li><a href="' + ownerTpl.link + '">' + ownerTpl.label + '</a></li><!--\n        ' + (repoTpl.label ? '--><li><a href="' + repoTpl.link + '">' + repoTpl.label + '</a></li><!--' : '') + foldersTpl.map(function (folder) {
+      return '--><li><a href="' + folder.link + '">' + folder.label + '</a></li>';
     }).join('\n') + '</ul>');
   };
 }
