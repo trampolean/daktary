@@ -2,11 +2,12 @@
 GENERAL
 */
 body {
-  font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+  font-family: "Open Sans", Arial, sans-serif;
   font-size: 1rem;
-  color: #6c6c6c;
+  color: #4d4d4d;
   -webkit-font-smoothing: antialiased;
   background:  #f8f8f8;
+  border-top: 3px solid #29abe2;
 }
 .container {
   margin: 0px auto;
@@ -17,10 +18,32 @@ p {
   margin-bottom: 10px;
 }
 a {
-  color: #9b4e4e;
+  color: #29abe2;
 }
-h1,
+
 h2,
 h3 {
-  color: #9b4e4e;
+  color: #29abe2;
+}
+
+h1 {
+font-family: "Montserrat", Arial, sans-serif;
+}
+h1 span {
+  color: #29abe2;
+}
+
+header {
+  display: table;
+  width: 100%;
+    padding: 20px 0 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #000;
+}
+header h1,
+header .search-engine-wrapper {
+  display: table-cell;
+}
+header .search-engine-wrapper {
+  width: 50%;
 }
