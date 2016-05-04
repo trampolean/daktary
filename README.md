@@ -46,23 +46,22 @@ Dans un [Firefox](https://www.mozilla.org/fr/firefox/developer/) **récent** lan
 http://127.0.0.1:8000/tests
 
 ## Intégration
+* Affichage home
 * Affichage repo
 * Affichage folder
-* Affichage ressources
 * Bouton recherche avec entrée
 * Résultats recherche : nombre (en dur)
 * Résultats recherche : afficher ou non la requète
 * Résultats recherche : cacher breadcrumbs
 * Résultats recherche : afficher repo où a été effectué la recherche
-* Espace manquant breadcrumbs
-* Affichage champs recherche grand
-* Changer "Liste des repos" 
-* Meta : semantique + affichage
-* Affichage fiches (typo, justified text)
-* Fiche : liens -> couleurs, title hover
+* Résultats recherche : afficher si pas de résultat
+* Meta fiche: semantique + affichage
+* Affichage fiches : typo, justified text, couleurs
+* Affichage fiches : éléments html (img, embed, abbr, acronym, cite, code, small, sub, sup, ol)
+* Affichage fiches : édition prose.io, lien help, retour haut de page
 * Responsive : mobile first ?
-* notification : ex. aucune fiche trouvée
 
+* Class autour notes pied de page
 * Simplify tests writes merge on async
 
 ## Discussion intégration
