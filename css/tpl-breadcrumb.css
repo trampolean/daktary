@@ -6,6 +6,9 @@
   display: inline-block;
   list-style-type: none;
 }
+.breadcrumb li:not(:first-child) {
+  margin-left: 5px;
+}
 .breadcrumb li:not(:first-child):before {
   content: '> ';
 }
