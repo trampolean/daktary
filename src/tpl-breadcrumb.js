@@ -28,11 +28,11 @@
 
     template.breadcrumb.html(
       `<ul>
-        <li><a href="/">Accueil</a></li><!--
-        --><li><a href="${ownerTpl.link}">${ownerTpl.label}</a></li><!--
-        ${repoTpl.label ? `--><li><a href="${repoTpl.link}">${repoTpl.label}</a></li><!--` : ''}` +
+        <li><a href="/">Accueil</a></li>
+        <li><a href="${ownerTpl.link}">${ownerTpl.label}</a></li>
+        ${repoTpl.label ? `<li><a href="${repoTpl.link}">${repoTpl.label}</a></li>` : ''}` +
         foldersTpl.map(folder =>
-        `--><li><a href="${folder.link}">${folder.label}</a></li>`
+        `<li><a href="${folder.link}">${folder.label}</a></li>`
         ).join('\n') +
       `</ul>`)
   }

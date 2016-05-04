@@ -8,7 +8,7 @@
   </header>
   <main>
     <section class="home-intro">
-        <h2>Partager en équipe et au monde ses apprentissages sur le faire ensemble</h2>
+        <h2>Partager en équipe et au monde <span>ses apprentissages sur le faire ensemble</span></h2>
         <a href="">Commencer ici</a>
         <a href="">Guide d'utilisation</a>
     </section>
