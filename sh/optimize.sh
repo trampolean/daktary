@@ -2,25 +2,26 @@
 
 # Merge JS files and convert in ES5
 babel \
-  ./src/config.js \
   ./src/lib/dk-githubUrl.js \
-  ./src/lib/dk-router.js \
   ./src/lib/dk-layout.js \
-  ./src/lib/dk-template.js \
   ./src/lib/dk-markdown.js \
+  ./src/lib/dk-router.js \
+  ./src/lib/dk-template.js \
+  ./src/config.js \
   ./src/init.js \
-  ./src/layout-viewer.js \
   ./src/layout-folders.js \
+  ./src/layout-home.js \
   ./src/layout-repositories.js \
   ./src/layout-searchList.js \
+  ./src/layout-viewer.js \
   ./src/routes.js \
-  ./src/tpl-contribution.js \
-  ./src/tpl-parentRepo.js \
-  ./src/tpl-crews.js \
-  ./src/tpl-search.js \
   ./src/tpl-breadcrumb.js \
+  ./src/tpl-contribution.js \
+  ./src/tpl-crews.js \
   ./src/tpl-folders.js \
+  ./src/tpl-parentRepo.js \
   ./src/tpl-repos.js \
+  ./src/tpl-search.js \
   ./src/tpl-searchList.js > dist/dk.js
 
 # Minify js files
@@ -30,6 +31,7 @@ uglifyjs dist/dk.js --compress -o dist/dk.min.js
 uglifycss \
   ./css/reset.css \
   ./css/daktary.css \
+  ./css/layout-home.css \
   ./css/layout-repositories.css \
   ./css/tpl-contribution.css \
   ./css/tpl-parentRepo.css \
