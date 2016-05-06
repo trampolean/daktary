@@ -14,7 +14,7 @@ class Markdown {
       .split('\n')
       .filter(elt => elt.trim())
       .map(elt => {
-        const [key, value] = elt.split(':')
+        const [, key, value] = elt.match(/([\s\S]*?): (.*)/)
         this.metas[key.trim()] = value.trim()
       })
   }
