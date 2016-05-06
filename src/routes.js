@@ -1,7 +1,7 @@
 // Create a router
 const router = new Router()
 
-router.route('home', function () {
+router.route('/', function () {
   this.currentRoute = 'home'
   layout.home.render()
 })
