@@ -7,6 +7,7 @@ babel \
   ./src/lib/dk-router.js \
   ./src/lib/dk-layout.js \
   ./src/lib/dk-template.js \
+  ./src/lib/dk-markdown.js \
   ./src/init.js \
   ./src/layout-viewer.js \
   ./src/layout-folders.js \
