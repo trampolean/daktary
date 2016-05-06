@@ -708,23 +708,14 @@ template.crews.data = function () {
           return response.text();
         }).then(function (md) {
           var contribution = new Markdown(md);
-          contribution.fullMetas = contribution.metas;
-          contribution.fullMetas.name = name;
-          contribution.fullMetas.type = type;
-          contribution.fullMetas.url = html_url.replace('https://github.com/', '');
-          contribution.fullMetas.git_url = html_url;
-          contribution.fullMetas.readme_url = html_url.replace('https://github.com/', '') + '/blob/master/README.md';var _contribution$fullMetas = contribution.fullMetas;
-          name = _contribution$fullMetas.name;
-          type = _contribution$fullMetas.type;
-          bandeau_url = _contribution$fullMetas.bandeau_url;
-          url = _contribution$fullMetas.url;
-          git_url = _contribution$fullMetas.git_url;
-          readme_url = _contribution$fullMetas.readme_url;
-          description = _contribution$fullMetas.description;
-          contributeurs = _contribution$fullMetas.contributeurs;
-          dossiers = _contribution$fullMetas.dossiers;
-          fiches = _contribution$fullMetas.fiches;
-
+          var url = html_url.replace('https://github.com/', '');
+          var git_url = html_url;
+          var readme_url = html_url.replace('https://github.com/', '') + '/blob/master/README.md';
+          var bandeau_url = contribution.metas.bandeau_url;
+          var description = contribution.metas.description;
+          var contributeurs = contribution.metas.contributeurs;
+          var dossiers = contribution.metas.dossiers;
+          var fiches = contribution.metas.fiches;
           html.push('<article class="gh-list-item gh-type-repo">\n                    <h2 class="gh-list-title"><a href="#' + url + '">' + name + '</a></h2>\n                    <div class="gh-list-meta">\n                      <p>Dossiers : ' + dossiers + ' - Fiches : ' + fiches + '</p>\n                      <p>Contributeurs : ' + contributeurs + '</p>\n                      </p>\n                      <p>\n                        <a href="' + git_url + '">Voir sur Github</a>\n                      </p>\n                    </div>\n                    <img src="' + (bandeau_url ? bandeau_url : 'http://lorempixel.com/g/350/150/') + '">\n                    <p class="gh-list-excerpt">' + description + '</p>\n                    <a class="gh-list-readmore"\n                        title="Lire la suite de la fiche Titre de la fiche"\n                        href="#' + readme_url + '">Lire la présentation complète</a>\n                  </article>');
           template.repos.html(html.join('\n'));
           template.repos.renderAsync(template.repos._htmlTpl);

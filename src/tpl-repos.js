@@ -14,13 +14,14 @@
             .then(response => response.text())
             .then(md => {
               let contribution = new Markdown(md)
-              contribution.fullMetas = contribution.metas
-              contribution.fullMetas.name = name
-              contribution.fullMetas.type = type
-              contribution.fullMetas.url = html_url.replace('https://github.com/', '')
-              contribution.fullMetas.git_url = html_url
-              contribution.fullMetas.readme_url = html_url.replace('https://github.com/', '') + '/blob/master/README.md'
-              ;({name, type, bandeau_url, url, git_url, readme_url, description, contributeurs, dossiers, fiches} = contribution.fullMetas)
+              let url = html_url.replace('https://github.com/', '')
+              let git_url = html_url
+              let readme_url = html_url.replace('https://github.com/', '') + '/blob/master/README.md'
+              let bandeau_url = contribution.metas.bandeau_url
+              let description = contribution.metas.description
+              let contributeurs = contribution.metas.contributeurs
+              let dossiers = contribution.metas.dossiers
+              let fiches = contribution.metas.fiches
               html.push(
                   `<article class="gh-list-item gh-type-repo">
                     <h2 class="gh-list-title"><a href="#${url}">${name}</a></h2>
