@@ -87,7 +87,7 @@ const Router = class Router {
   }
   _findAndSetCurrentRoute() {
     let route = {}
-    for(let index in this._routes) {
+    for (let index in this._routes) {
       route = this._routes[index]
       if (this._checkPatternWithUrl(route.pattern)) {
         // Execute the action attach on a route
@@ -104,7 +104,7 @@ const Router = class Router {
   }
   go(url) {
     this._resetRoute()
-    this.url = url
+    this.url = url || '/'
     this._findAndSetCurrentRoute()
     this.injectLayout()
   }

@@ -3,8 +3,11 @@
   padding: 20px 0;
 }
 .breadcrumb li {
-  display: inline-block;
+  display: inline;
   list-style-type: none;
+}
+.breadcrumb li:not(:first-child) {
+  margin-left: 5px;
 }
 .breadcrumb li:not(:first-child):before {
   content: '> ';
