@@ -12,6 +12,7 @@ Tests unitaires :
 * [Expect](https://github.com/Automattic/expect.js)
 
 ## À prévoir
+* Merge contribution et breadcrumb parent repo
 * Version simplifiée pour les non métas
 * Garder la recherche - searchList
 * link # et /#
