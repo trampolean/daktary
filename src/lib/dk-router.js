@@ -107,6 +107,7 @@ const Router = class Router {
     this.url = url || '/'
     this._findAndSetCurrentRoute()
     this.injectLayout()
+    document.location = `#${url}`
   }
   route(pattern, action) {
     this._routes.push({
