@@ -1,5 +1,5 @@
 {
-  html = ({link, label, html}) => `
+  const html = ({link, label, html}) => `
     <div id="parentRepo" class="breadcrumbs">
       À retrouver dans le dépôt : <a href="${link}">${label}</a>
     </div>
