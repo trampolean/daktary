@@ -477,7 +477,7 @@ var layout = new Layout();
 
 {
   layout.create('home');
-  layout.home.html('\n  <header class="clearfix">\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <section class="home-intro">\n        <h2>Partager en équipe et au monde <span>ses apprentissages sur le faire ensemble</span></h2>\n        <a href="">Commencer ici</a>\n        <a href="">Guide d\'utilisation</a>\n    </section>\n    <section id="gh-crew-list" data-template="crews">\n    </section>\n  </main>');
+  layout.home.html('\n  <header class="clearfix">\n    <h1>multi<span>BàO</span></h1>\n  </header>\n  <main>\n    <section class="home-intro">\n        <h2>Partager en équipe et au monde <span>ses apprentissages sur le faire ensemble</span></h2>\n        <a href="#multibao/contributions/blob/master/pages/commencer_ici.md">Commencer ici</a>\n        <a href="#multibao/documentation/blob/master/README.md">Guide d\'utilisation</a>\n    </section>\n    <section id="gh-crew-list" data-template="crews">\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -696,7 +696,7 @@ template.crews.data = function () {
     fetch(reposUrl, { headers: { Accept: 'application/vnd.github.v3' } }).then(function (response) {
       return response.json();
     }).then(function (json) {
-      var ressources = json.map(function (_ref) {
+      json.map(function (_ref) {
         var name = _ref.name;
         var type = _ref.type;
         var html_url = _ref.html_url;
@@ -711,12 +711,12 @@ template.crews.data = function () {
           var url = html_url.replace('https://github.com/', '');
           var git_url = html_url;
           var readme_url = html_url.replace('https://github.com/', '') + '/blob/master/README.md';
-          var bandeau_url = contribution.metas.bandeau_url;
+          var banner_url = contribution.metas.bandeau_url;
           var description = contribution.metas.description;
-          var contributeurs = contribution.metas.contributeurs;
-          var dossiers = contribution.metas.dossiers;
-          var fiches = contribution.metas.fiches;
-          html.push('<article class="gh-list-item gh-type-repo">\n                    <h2 class="gh-list-title"><a href="#' + url + '">' + name + '</a></h2>\n                    <div class="gh-list-meta">\n                      <p>Dossiers : ' + dossiers + ' - Fiches : ' + fiches + '</p>\n                      <p>Contributeurs : ' + contributeurs + '</p>\n                      </p>\n                      <p>\n                        <a href="' + git_url + '">Voir sur Github</a>\n                      </p>\n                    </div>\n                    <img src="' + (bandeau_url ? bandeau_url : 'http://lorempixel.com/g/350/150/') + '">\n                    <p class="gh-list-excerpt">' + description + '</p>\n                    <a class="gh-list-readmore"\n                        title="Lire la suite de la fiche Titre de la fiche"\n                        href="#' + readme_url + '">Lire la présentation complète</a>\n                  </article>');
+          var contributors = contribution.metas.contributeurs;
+          var folders = contribution.metas.dossiers;
+          var contributions = contribution.metas.fiches;
+          html.push('<article class="gh-list-item gh-type-repo">\n                  <h2 class="gh-list-title"><a href="#' + url + '">' + name + '</a></h2>\n                  <div class="gh-list-meta">\n                    <p>Dossiers : ' + folders + ' - Fiches : ' + contributions + '</p>\n                    <p>Contributeurs : ' + contributors + '</p>\n                    </p>\n                    <p>\n                      <a href="' + git_url + '">Voir sur Github</a>\n                    </p>\n                  </div>\n                  <img src="' + (banner_url ? banner_url : 'http://lorempixel.com/g/350/150/') + '">\n                  <p class="gh-list-excerpt">' + description + '</p>\n                  <a class="gh-list-readmore"\n                      title="Lire la suite de la fiche Titre de la fiche"\n                      href="#' + readme_url + '">Lire la présentation complète</a>\n                </article>');
           template.repos.html(html.join('\n'));
           template.repos.renderAsync(template.repos._htmlTpl);
         });
@@ -767,32 +767,35 @@ function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else i
 
     router.params.owner = user;
     var apiUrl = new GithubUrl(router.params).toGhApiSearch(query);
+    var html = [];
     fetch(apiUrl, { headers: { Accept: 'application/vnd.github.v3.html' } }).then(function (response) {
       return response.json();
     }).then(function (json) {
-      var ressources = json.items.map(function (_ref) {
+      json.items.map(function (_ref) {
         var name = _ref.name;
         var type = _ref.type;
         var path = _ref.path;
         var html_url = _ref.html_url;
         var repository = _ref.repository;
-        return {
-          name: name,
-          type: type,
-          prose_url: ('http://prose.io/#' + html_url.match(/^https:\/\/github.com\/(.*)/)[1]).replace('blob', 'edit'),
-          git_url: html_url,
-          url: '' + repository.full_name + '/blob/master/' + path
-        };
+
+        var readmeUrl = { owner: router.params.owner, repo: repository.name, branch: 'master', path: path };
+        var apiUrl = new GithubUrl(readmeUrl).toGhApiUrl();
+        fetch(apiUrl, { headers: { Accept: 'application/vnd.github.v3.raw' } }).then(function (response) {
+          return response.text();
+        }).then(function (md) {
+          var contribution = new Markdown(md);
+          var prose_url = ('http://prose.io/#' + html_url.match(/^https:\/\/github.com\/(.*)/)[1]).replace('blob', 'edit');
+          var git_url = html_url;
+          var url = '' + repository.full_name + '/blob/master/' + path;
+          var description = contribution.metas.description;
+          var title = contribution.metas.titre;
+          var authors = contribution.metas.auteurs;
+          var banner_url = contribution.metas.bandeau_url;
+          html.push('<article class="gh-list-item gh-type-' + type + '">\n                   <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n                   <div class="gh-list-meta">\n                     <p>Créé par : ' + authors + '</p>\n                     <p>\n                       ' + (type === 'file' ? '<a href="' + prose_url + '">Editer la fiche</a> - ' : '') + '\n                       <a href="' + git_url + '">Voir sur Github</a>\n                     </p>\n                   </div>\n                   <img src="' + (banner_url ? banner_url : 'http://lorempixel.com/g/350/150/') + '">\n                   <p class="gh-list-excerpt">' + description + '</p>\n                   <a class="gh-list-readmore"\n                     title="Lire la suite de la fiche Titre de la fiche"\n                     href="#' + url + '">Lire la fiche</a>\n                  </article>');
+          template.searchList.html(html.join('\n'));
+          template.searchList.renderAsync(template.searchList._htmlTpl);
+        });
       });
-      template.searchList.html(ressources.map(function (_ref2) {
-        var type = _ref2.type;
-        var name = _ref2.name;
-        var url = _ref2.url;
-        var prose_url = _ref2.prose_url;
-        var git_url = _ref2.git_url;
-        return '<article class="gh-list-item gh-type-' + type + '">\n              <h2 class="gh-list-title"><a href="#' + url + '">' + name + '</a></h2>\n              <div class="gh-list-meta">\n                <p>Mis à jour le : 02/02/16</p>\n                <p>Créé par : <a href="">pntbr</a> / Contributeurs les plus actifs :\n                  <a href="">pntbr</a> / <a href="">wolffgang</a>\n                </p>\n                <p>\n                 ' + (type === 'file' ? '<a href="' + prose_url + '">Editer la fiche</a> - ' : '') + '\n                 <a href="' + git_url + '">Voir sur Github</a>\n                </p>\n              </div>\n              <!--si <image--></image-->\n              <img src="http://placehold.it/350x150">\n              <!--/si image-->\n              <p class="gh-list-excerpt">Le début de la fiche qui parle de ...</p>\n              <a class="gh-list-readmore"\n                title="Lire la suite de la fiche Titre de la fiche"\n                href="' + url + '">Lire la fiche</a>\n            </article>';
-      }).join('\n'));
-      template.searchList.renderAsync(template.searchList._htmlTpl);
     });
   };
 }
