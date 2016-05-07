@@ -12,18 +12,27 @@ Tests unitaires :
 * [Expect](https://github.com/Automattic/expect.js)
 
 ## À prévoir
+* List in meta
+* Link absolute/relatif
+* Garder la recherche - searchList
+* Cacher autres que .md
+* Faire remonter les dossiers en premier
+* Ressources : réponses not found => 404
+* virer le lien sur le breadcrumb
+* recherche en home
+* Récupérer le nombre de dossiers et nombres de contributeurs
 * vrai SLA
 * Travis
 * Classement des dossiers
-* Liens après un fork
-* Home
-* Nombre de contributions
 * Notifications
 * Meta-Data : Contribs - Repos - Folders
-* Cacher autres que .md
 * Loading
 * Infinite scroll
-* Ressources : réponses not found => 404
+* Simplify tests writes merge on async
+
+* Cacher les ressources
+* Doc de développement
+* Se passer de Prose.io
 
 ## Pour tester le site en local
 ```bash
@@ -49,10 +58,8 @@ http://127.0.0.1:8000/tests
 * Affichage home
 * Affichage repo
 * Affichage folder
-* Bouton recherche avec entrée
 * Résultats recherche : nombre (en dur)
 * Résultats recherche : afficher ou non la requète
-* Résultats recherche : cacher breadcrumbs
 * Résultats recherche : afficher repo où a été effectué la recherche
 * Résultats recherche : afficher si pas de résultat
 * Meta fiche: semantique + affichage
@@ -62,6 +69,9 @@ http://127.0.0.1:8000/tests
 * Responsive : mobile first ?
 
 * Class autour notes pied de page
-* Simplify tests writes merge on async
 
 ## Discussion intégration
+* Regarder GitBook
+
+## Discussion PO
+* Seul les dépôts avec README sont visibles
