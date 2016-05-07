@@ -107,7 +107,9 @@ const Router = class Router {
     this.url = url || '/'
     this._findAndSetCurrentRoute()
     this.injectLayout()
-    document.location = `#${url}`
+    if (this.currentRoute !== 'home') {
+      window.location = `#${url}`
+    }
   }
   route(pattern, action) {
     this._routes.push({
