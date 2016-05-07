@@ -12,9 +12,11 @@ Tests unitaires :
 * [Expect](https://github.com/Automattic/expect.js)
 
 ## À prévoir
-* List in meta
-* Link absolute/relatif
+* Merge contribution et breadcrumb parent repo
+* Version simplifiée pour les non métas
 * Garder la recherche - searchList
+* link # et /#
+* Link absolute/relatif
 * Cacher autres que .md
 * Faire remonter les dossiers en premier
 * Ressources : réponses not found => 404

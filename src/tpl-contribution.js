@@ -1,13 +1,26 @@
 {
-  template.create('contribution')
+  html = ({link, label, html}) => `
+    <div id="parentRepo" class="breadcrumbs">
+      À retrouver dans le dépôt : <a href="${link}">${label}</a>
+    </div>
+    <article id="contribution">
+      ${html}
+    </article>
+  `
 
+  template.create('contribution')
   template.contribution.data = () => {
-    const apiUrl = new GithubUrl(router.params).toGhApiUrl()
-    fetch(apiUrl, {headers: {Accept: 'application/vnd.github.v3.html'}})
-      .then(response => response.text())
-      .then(html => {
-        template.contribution.html(html)
-        template.contribution.renderAsync()
-      })
+    const ghApi = new GithubUrl(router.params)
+    ghApi.getHtmlBlob().then(htmlResponse => {
+      const {owner, repo, branch, path} = router.params
+      const data = {
+        html: htmlResponse,
+        link: `#${owner}/${repo}/tree/${branch}/` +
+          `${path.replace(/(\/|)[0-9A-Za-z\u00C0-\u017F\-\_\.]*$/, '')}`,
+        label: `${owner} - ${repo}`
+      }
+      template.contribution.html(html(data))
+      template.contribution.renderAsync()
+    })
   }
 }

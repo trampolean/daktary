@@ -17,6 +17,26 @@ class GithubUrl {
       path: path ? `/${path}` : ''
     }
   }
+  _listMd(json) {
+    return json.filter((elt) => {
+      if (elt.type === 'dir' || elt.name.match(/.md$/)) {
+        return elt
+      }
+    })
+  }
+  _listByFolder(json) {
+    const files = []
+    const dirs = []
+    json.map((elt) => {
+      if (elt.type === 'file') {
+        files.push(elt)
+      }
+      if (elt.type === 'dir') {
+        dirs.push(elt)
+      }
+    })
+    return dirs.concat(files)
+  }
   toGhApiSearch(query) {
     const {owner} = this.ghData
     return `https://api.github.com/search/code` +
@@ -34,4 +54,49 @@ class GithubUrl {
     return `https://api.github.com/users/${owner}/repos` +
            `?client_id=${keys.id}&client_secret=${keys.secret}`
   }
+  getHtmlBlob() {
+    return new Promise(
+      (resolve, reject) => {
+        fetch(this.toGhApiUrl(), {headers: {Accept: 'application/vnd.github.v3.html'}})
+          .then(response => response.text())
+          .then(htmlResponse => {
+            resolve(htmlResponse)
+          })
+      })}
+  getMdBlob() {
+    return new Promise(
+      (resolve, reject) => {
+        fetch(this.toGhApiUrl(), {headers: {Accept: 'application/vnd.github.v3.raw'}})
+          .then(response => response.text())
+          .then(mdResponse => {
+            resolve(mdResponse)
+          })
+      })}
+  getJsonRepo() {
+    return new Promise(
+      (resolve, reject) => {
+        fetch(this.toGhRepoApiUrl(), {headers: {Accept: 'application/vnd.github.v3'}})
+          .then(response => response.json())
+          .then(json => {
+            resolve(json)
+          })
+      })}
+  getJsonSearch(query) {
+    return new Promise(
+      (resolve, reject) => {
+        fetch(this.toGhApiSearch(query), {headers: {Accept: 'application/vnd.github.v3.html'}})
+          .then(response => response.json())
+          .then(json => {
+            resolve(json)
+          })
+      })}
+  getJsonFolders() {
+    return new Promise(
+      (resolve, reject) => {
+        fetch(this.toGhApiUrl(), {headers: {Accept: 'application/vnd.github.v3'}})
+          .then(response => response.json())
+          .then(json => {
+            resolve(this._listByFolder(this._listMd(json)))
+          })
+      })}
 }
