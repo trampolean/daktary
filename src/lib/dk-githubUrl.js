@@ -17,6 +17,26 @@ class GithubUrl {
       path: path ? `/${path}` : ''
     }
   }
+  _listMd(json) {
+    return json.filter((elt) => {
+      if (elt.type === 'dir' || elt.name.match(/.md$/)) {
+        return elt
+      }
+    })
+  }
+  _listByFolder(json) {
+    const files = []
+    const dirs = []
+    json.map((elt) => {
+      if (elt.type === 'file') {
+        files.push(elt)
+      }
+      if (elt.type === 'dir') {
+        dirs.push(elt)
+      }
+    })
+    return dirs.concat(files)
+  }
   toGhApiSearch(query) {
     const {owner} = this.ghData
     return `https://api.github.com/search/code` +
@@ -76,7 +96,7 @@ class GithubUrl {
         fetch(this.toGhApiUrl(), {headers: {Accept: 'application/vnd.github.v3'}})
           .then(response => response.json())
           .then(json => {
-            resolve(json)
+            resolve(this._listByFolder(this._listMd(json)))
           })
       })}
 }
