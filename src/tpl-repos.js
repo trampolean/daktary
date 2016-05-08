@@ -17,6 +17,11 @@
           href="#${readme_url}">Lire la présentation complète</a>
     </article>`
 
+  const htmlReposSimple = ({url, title}) =>
+    `<article class="gh-list-item gh-type-repo">
+      <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
+    </article>`
+
   template.create('repos')
 
   template.repos.data = () => {
@@ -29,18 +34,26 @@
         ghApiBlob.getMdBlob()
           .then(mdResponse => {
             const contribution = new Markdown(mdResponse)
-            const data = {
-              url: html_url.replace('https://github.com/', ''),
-              git_url: html_url,
-              readme_url: html_url.replace('https://github.com/', '') + '/blob/master/README.md',
-              title: contribution.metas.titre,
-              banner_url: contribution.metas.bandeau_url,
-              description: contribution.metas.description,
-              contributors: contribution.metas.contributeurs,
-              folders: contribution.metas.dossiers,
-              contributions: contribution.metas.fiches
+            if (contribution.isMetas()) {
+              const data = {
+                url: html_url.replace('https://github.com/', ''),
+                git_url: html_url,
+                readme_url: html_url.replace('https://github.com/', '') + '/blob/master/README.md',
+                title: contribution.metas.titre,
+                banner_url: contribution.metas.bandeau_url,
+                description: contribution.metas.description,
+                contributors: contribution.metas.contributeurs,
+                folders: contribution.metas.dossiers,
+                contributions: contribution.metas.fiches
+              }
+              html.push(htmlRepos(data))
+            } else {
+              const dataSimple = {
+                url: html_url.replace('https://github.com/', ''),
+                title: name
+              }
+              html.push(htmlReposSimple(dataSimple))
             }
-            html.push(htmlRepos(data))
             template.repos.html(html.join('\n'))
             template.repos.renderAsync(template.repos._htmlTpl)
           })

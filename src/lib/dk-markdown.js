@@ -2,11 +2,11 @@ class Markdown {
   constructor(content) {
     this.content = content
     this.metas = {}
-    if (this._isMetas()) {
+    if (this.isMetas()) {
       this._extractMetas()
     }
   }
-  _isMetas() {
+  isMetas() {
     return !! this.content.match(/---([\s\S]*?)---/)
   }
   _extractMetas() {
