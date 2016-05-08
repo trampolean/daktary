@@ -1,5 +1,5 @@
 {
-  const htmlWithMetas = ({url, title, authors, prose_url, git_url, banner_url, description}) =>
+  const htmlWithMetas = ({url, title, authors, prose_url, git_url, image_url, description}) =>
     `<article class="gh-list-item gh-type-file">
        <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
        <div class="gh-list-meta">
@@ -9,7 +9,7 @@
            <a href="${git_url}">Voir sur Github</a>
          </p>
        </div>
-       <img src="${banner_url}">
+       <img src="${image_url}">
        <p class="gh-list-excerpt">${description}</p>
        <a class="gh-list-readmore"
          title="Lire la suite de la fiche Titre de la fiche"
@@ -41,9 +41,9 @@
                 git_url: html_url,
                 url: `${repository.full_name}/blob/master/${path}`,
                 description: contribution.metas.description,
-                title: contribution.metas.titre,
-                authors: contribution.metas.auteurs,
-                banner_url: contribution.metas.bandeau_url || 'http://lorempixel.com/g/350/150/'
+                title: contribution.metas.title,
+                authors: contribution.metas.contributors,
+                image_url: contribution.metas.image_url || 'http://lorempixel.com/g/350/150/'
               }
               html.push(htmlWithMetas(metas))
             } else {

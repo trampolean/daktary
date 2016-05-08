@@ -1,16 +1,16 @@
 {
-  const htmlWithMetas = ({url, title, folders, contributions, contributors, git_url, banner_url, description, readme_url}) =>
+  const htmlWithMetas = ({url, title, folders, files, contributors, git_url, image_url, description, readme_url}) =>
     `<article class="gh-list-item gh-type-repo">
       <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
       <div class="gh-list-meta">
-        <p>Dossiers : ${folders} - Fiches : ${contributions}</p>
+        <p>Dossiers : ${folders} - Fiches : ${files}</p>
         <p>Contributeurs : ${contributors}</p>
         </p>
         <p>
           <a href="${git_url}">Voir sur Github</a>
         </p>
       </div>
-      <img src="${(banner_url) ? banner_url : 'http://lorempixel.com/g/350/150/'}">
+      <img src="${image_url}">
       <p class="gh-list-excerpt">${description}</p>
       <a class="gh-list-readmore"
           title="Lire la suite de la fiche Titre de la fiche"
@@ -39,13 +39,14 @@
                 url: html_url.replace('https://github.com/', ''),
                 git_url: html_url,
                 readme_url: html_url.replace('https://github.com/', '') + '/blob/master/README.md',
-                title: contribution.metas.titre,
-                banner_url: contribution.metas.bandeau_url,
+                title: contribution.metas.title,
+                image_url: contribution.metas.image_url || 'http://lorempixel.com/g/350/150/',
                 description: contribution.metas.description,
-                contributors: contribution.metas.contributeurs,
-                folders: contribution.metas.dossiers,
-                contributions: contribution.metas.fiches
+                contributors: contribution.metas.contributors,
+                folders: contribution.metas.folders,
+                files: contribution.metas.files
               }
+              console.log('metas', contribution.metas)
               html.push(htmlWithMetas(metas))
             } else {
               const noMetas = {
