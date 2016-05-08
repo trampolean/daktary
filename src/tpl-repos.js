@@ -1,5 +1,5 @@
 {
-  const htmlRepos = ({url, title, folders, contributions, contributors, git_url, banner_url, description, readme_url}) =>
+  const htmlWithMetas = ({url, title, folders, contributions, contributors, git_url, banner_url, description, readme_url}) =>
     `<article class="gh-list-item gh-type-repo">
       <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
       <div class="gh-list-meta">
@@ -17,7 +17,7 @@
           href="#${readme_url}">Lire la présentation complète</a>
     </article>`
 
-  const htmlReposSimple = ({url, title}) =>
+  const htmlNoMetas = ({url, title}) =>
     `<article class="gh-list-item gh-type-repo">
       <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
     </article>`
@@ -35,7 +35,7 @@
           .then(mdResponse => {
             const contribution = new Markdown(mdResponse)
             if (contribution.isMetas()) {
-              const data = {
+              const metas = {
                 url: html_url.replace('https://github.com/', ''),
                 git_url: html_url,
                 readme_url: html_url.replace('https://github.com/', '') + '/blob/master/README.md',
@@ -46,13 +46,13 @@
                 folders: contribution.metas.dossiers,
                 contributions: contribution.metas.fiches
               }
-              html.push(htmlRepos(data))
+              html.push(htmlWithMetas(metas))
             } else {
-              const dataSimple = {
+              const noMetas = {
                 url: html_url.replace('https://github.com/', ''),
                 title: name
               }
-              html.push(htmlReposSimple(dataSimple))
+              html.push(htmlNoMetas(noMetas))
             }
             template.repos.html(html.join('\n'))
             template.repos.renderAsync(template.repos._htmlTpl)

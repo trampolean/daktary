@@ -1,5 +1,5 @@
 {
-  const htmlSearchList = ({url, title, authors, prose_url, git_url, banner_url, description}) =>
+  const htmlWithMetas = ({url, title, authors, prose_url, git_url, banner_url, description}) =>
     `<article class="gh-list-item gh-type-file">
        <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
        <div class="gh-list-meta">
@@ -16,7 +16,7 @@
          href="#${url}">Lire la fiche</a>
      </article>`
 
-  const htmlSearchListSimple = ({url, title}) =>
+  const htmlNoMetas = ({url, title}) =>
     `<article class="gh-list-item gh-type-file">
         <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
      </article>`
@@ -36,7 +36,7 @@
           .then(mdResponse => {
             const contribution = new Markdown(mdResponse)
             if (contribution.isMetas()) {
-              const data = {
+              const metas = {
                 prose_url: `http://prose.io/#${html_url.match(/^https:\/\/github.com\/(.*)/)[1]}`.replace('blob', 'edit'),
                 git_url: html_url,
                 url: `${repository.full_name}/blob/master/${path}`,
@@ -45,13 +45,13 @@
                 authors: contribution.metas.auteurs,
                 banner_url: contribution.metas.bandeau_url || 'http://lorempixel.com/g/350/150/'
               }
-              html.push(htmlSearchList(data))
+              html.push(htmlWithMetas(metas))
             } else {
-              const dataSimple = {
+              const noMetas = {
                 title: name,
                 url: `${repository.full_name}/blob/master/${path}`
               }
-              html.push(htmlSearchListSimple(dataSimple))
+              html.push(htmlNoMetas(noMetas))
             }
             template.searchList.html(html.join('\n'))
             template.searchList.renderAsync(template.searchList._htmlTpl)
