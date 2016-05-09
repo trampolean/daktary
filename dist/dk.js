@@ -32,6 +32,30 @@ var GithubUrl = (function () {
   }
 
   _createClass(GithubUrl, [{
+    key: '_listMd',
+    value: function _listMd(json) {
+      return json.filter(function (elt) {
+        if (elt.type === 'dir' || elt.name.match(/.md$/)) {
+          return elt;
+        }
+      });
+    }
+  }, {
+    key: '_listByFolder',
+    value: function _listByFolder(json) {
+      var files = [];
+      var dirs = [];
+      json.map(function (elt) {
+        if (elt.type === 'file') {
+          files.push(elt);
+        }
+        if (elt.type === 'dir') {
+          dirs.push(elt);
+        }
+      });
+      return dirs.concat(files);
+    }
+  }, {
     key: 'toGhApiSearch',
     value: function toGhApiSearch(query) {
       var owner = this.ghData.owner;
@@ -59,6 +83,71 @@ var GithubUrl = (function () {
       var owner = _ghData2.owner;
 
       return 'https://api.github.com/users/' + owner + '/repos' + ('?client_id=' + keys.id + '&client_secret=' + keys.secret);
+    }
+  }, {
+    key: 'getHtmlBlob',
+    value: function getHtmlBlob() {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+        fetch(_this.toGhApiUrl(), { headers: { Accept: 'application/vnd.github.v3.html' } }).then(function (response) {
+          return response.text();
+        }).then(function (htmlResponse) {
+          resolve(htmlResponse);
+        });
+      });
+    }
+  }, {
+    key: 'getMdBlob',
+    value: function getMdBlob() {
+      var _this2 = this;
+
+      return new Promise(function (resolve, reject) {
+        fetch(_this2.toGhApiUrl(), { headers: { Accept: 'application/vnd.github.v3.raw' } }).then(function (response) {
+          return response.text();
+        }).then(function (mdResponse) {
+          resolve(mdResponse);
+        });
+      });
+    }
+  }, {
+    key: 'getJsonRepo',
+    value: function getJsonRepo() {
+      var _this3 = this;
+
+      return new Promise(function (resolve, reject) {
+        fetch(_this3.toGhRepoApiUrl(), { headers: { Accept: 'application/vnd.github.v3' } }).then(function (response) {
+          return response.json();
+        }).then(function (json) {
+          resolve(json);
+        });
+      });
+    }
+  }, {
+    key: 'getJsonSearch',
+    value: function getJsonSearch(query) {
+      var _this4 = this;
+
+      return new Promise(function (resolve, reject) {
+        fetch(_this4.toGhApiSearch(query), { headers: { Accept: 'application/vnd.github.v3.html' } }).then(function (response) {
+          return response.json();
+        }).then(function (json) {
+          resolve(json);
+        });
+      });
+    }
+  }, {
+    key: 'getJsonFolders',
+    value: function getJsonFolders() {
+      var _this5 = this;
+
+      return new Promise(function (resolve, reject) {
+        fetch(_this5.toGhApiUrl(), { headers: { Accept: 'application/vnd.github.v3' } }).then(function (response) {
+          return response.json();
+        }).then(function (json) {
+          resolve(_this5._listByFolder(_this5._listMd(json)));
+        });
+      });
     }
   }]);
 
@@ -138,14 +227,14 @@ var Markdown = (function () {
 
     this.content = content;
     this.metas = {};
-    if (this._isMetas()) {
+    if (this.isMetas()) {
       this._extractMetas();
     }
   }
 
   _createClass(Markdown, [{
-    key: '_isMetas',
-    value: function _isMetas() {
+    key: 'isMetas',
+    value: function isMetas() {
       return !!this.content.match(/---([\s\S]*?)---/);
     }
   }, {
@@ -153,17 +242,43 @@ var Markdown = (function () {
     value: function _extractMetas() {
       var _this = this;
 
-      this.content.match(/---([\s\S]*?)---/)[1].split('\n').filter(function (elt) {
-        return elt.trim();
-      }).map(function (elt) {
-        var _elt$match = elt.match(/([\s\S]*?): (.*)/);
+      var labelList = '';
+      this.content.match(/---([\s\S]*?)---/)[1].split('\n').map(function (elt) {
+        if (!!elt.match(/^\w+:$/)) {
+          console.log('elt ul', elt);
+          console.log('labelList ul', labelList);
 
-        var _elt$match2 = _slicedToArray(_elt$match, 3);
+          var _elt$match = elt.match(/^(\w+):$/);
 
-        var key = _elt$match2[1];
-        var value = _elt$match2[2];
+          var _elt$match2 = _slicedToArray(_elt$match, 2);
 
-        _this.metas[key.trim()] = value.trim();
+          var label = _elt$match2[1];
+
+          _this.metas[label] = [];
+          labelList = label;
+        }
+        if (elt.match(/^  - [\s\S]*?$/)) {
+          console.log('elt', elt);
+          console.log('labelList', labelList);
+
+          var _elt$match3 = elt.match(/^  - ([\s\S]*?)$/);
+
+          var _elt$match32 = _slicedToArray(_elt$match3, 2);
+
+          var content = _elt$match32[1];
+
+          _this.metas[labelList].push(content);
+        }
+        if (elt.match(/^\w+: [\s\S]*?$/)) {
+          var _elt$match4 = elt.match(/^(\w+): ([\s\S]*?)$/);
+
+          var _elt$match42 = _slicedToArray(_elt$match4, 3);
+
+          var label = _elt$match42[1];
+          var content = _elt$match42[2];
+
+          _this.metas[label] = content.trim();
+        }
       });
     }
   }]);
@@ -310,6 +425,9 @@ var Router = (function () {
       this.url = url || '/';
       this._findAndSetCurrentRoute();
       this.injectLayout();
+      if (this.currentRoute !== 'home') {
+        window.location = '#' + url;
+      }
     }
   }, {
     key: 'route',
@@ -477,7 +595,7 @@ var layout = new Layout();
 
 {
   layout.create('home');
-  layout.home.html('\n  <header class="clearfix">\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <section class="home-intro">\n        <h2>Partager en équipe et au monde <span>ses apprentissages sur le faire ensemble</span></h2>\n        <a href="">Commencer ici</a>\n        <a href="">Guide d\'utilisation</a>\n    </section>\n    <section id="gh-crew-list" data-template="crews">\n    </section>\n  </main>');
+  layout.home.html('\n  <header class="clearfix">\n    <h1>multi<span>BàO</span></h1>\n  </header>\n  <main>\n    <section class="home-intro">\n        <h2>Partager en équipe et au monde <span>ses apprentissages sur le faire ensemble</span></h2>\n        <a href="#multibao/contributions/blob/master/pages/commencer_ici.md">Commencer ici</a>\n        <a href="#multibao/documentation/blob/master/README.md">Guide d\'utilisation</a>\n    </section>\n    <section id="gh-crew-list" data-template="crews">\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -507,7 +625,7 @@ var layout = new Layout();
 
 {
   layout.create('viewer');
-  layout.viewer.html('\n  <main>\n    <div id="parentRepo" class="breadcrumbs" data-template="parentRepo">\n    </div>\n    <article data-template="contribution" id="contribution">\n    </article>\n  </main>\n  ');
+  layout.viewer.html('\n    <main data-template="contribution">\n    </main>\n  ');
 }
 // Create a router
 'use strict';
@@ -578,7 +696,7 @@ router.route(':owner', function () {
     var repoTpl = _ownerTpl$repoTpl$foldersTpl.repoTpl;
     var foldersTpl = _ownerTpl$repoTpl$foldersTpl.foldersTpl;
 
-    template.breadcrumb.html('<ul>\n        <li><a href="/">Accueil</a></li>\n        <li><a href="' + ownerTpl.link + '">' + ownerTpl.label + '</a></li>\n        ' + (repoTpl.label ? '<li><a href="' + repoTpl.link + '">' + repoTpl.label + '</a></li>' : '') + foldersTpl.map(function (folder) {
+    template.breadcrumb.html('<ul>\n        <li><a href="#">Accueil</a></li>\n        <li><a href="' + ownerTpl.link + '">' + ownerTpl.label + '</a></li>\n        ' + (repoTpl.label ? '<li><a href="' + repoTpl.link + '">' + repoTpl.label + '</a></li>' : '') + foldersTpl.map(function (folder) {
       return '<li><a href="' + folder.link + '">' + folder.label + '</a></li>';
     }).join('\n') + '</ul>');
   };
@@ -586,17 +704,34 @@ router.route(':owner', function () {
 'use strict';
 
 {
-  template.create('contribution');
+  (function () {
+    var html = function html(_ref) {
+      var link = _ref.link;
+      var label = _ref.label;
+      var _html = _ref.html;
+      return '\n    <div id="parentRepo" class="breadcrumbs">\n      À retrouver dans le dépôt : <a href="' + link + '">' + label + '</a>\n    </div>\n    <article id="contribution">\n      ' + _html + '\n    </article>\n  ';
+    };
 
-  template.contribution.data = function () {
-    var apiUrl = new GithubUrl(router.params).toGhApiUrl();
-    fetch(apiUrl, { headers: { Accept: 'application/vnd.github.v3.html' } }).then(function (response) {
-      return response.text();
-    }).then(function (html) {
-      template.contribution.html(html);
-      template.contribution.renderAsync();
-    });
-  };
+    template.create('contribution');
+    template.contribution.data = function () {
+      var ghApi = new GithubUrl(router.params);
+      ghApi.getHtmlBlob().then(function (htmlResponse) {
+        var _router$params = router.params;
+        var owner = _router$params.owner;
+        var repo = _router$params.repo;
+        var branch = _router$params.branch;
+        var path = _router$params.path;
+
+        var data = {
+          html: htmlResponse,
+          link: '#' + owner + '/' + repo + '/tree/' + branch + '/' + ('' + path.replace(/(\/|)[0-9A-Za-z\u00C0-\u017F\-\_\.]*$/, '')),
+          label: '' + owner + ' - ' + repo
+        };
+        template.contribution.html(html(data));
+        template.contribution.renderAsync();
+      });
+    };
+  })();
 }
 /**
 * Add selected in current crew and return the crews list.
@@ -633,96 +768,178 @@ template.crews.data = function () {
 'use strict';
 
 {
-  template.create('folders');
-
-  template.folders.data = function () {
-    var apiUrl = new GithubUrl(router.params).toGhApiUrl();
-    fetch(apiUrl, { headers: { Accept: 'application/vnd.github.v3' } }).then(function (response) {
-      return response.json();
-    }).then(function (json) {
-      var ressources = json.map(function (_ref) {
-        var name = _ref.name;
-        var type = _ref.type;
-        var html_url = _ref.html_url;
-        return {
-          name: name,
-          type: type,
-          prose_url: ('http://prose.io/#' + html_url.match(/^https:\/\/github.com\/(.*)/)[1]).replace('blob', 'edit'),
-          git_url: html_url,
-          url: '' + html_url.match(/^https:\/\/github.com\/(.*)/)[1]
-        };
-      });
-      template.folders.html(ressources.map(function (_ref2) {
-        var type = _ref2.type;
-        var name = _ref2.name;
-        var url = _ref2.url;
-        var prose_url = _ref2.prose_url;
-        var git_url = _ref2.git_url;
-        return '<article class="gh-list-item gh-type-' + type + '">\n              <h2 class="gh-list-title"><a href="#' + url + '">' + name + '</a></h2>\n              <div class="gh-list-meta">\n                <p>Mis à jour : 02/02/16</p>\n                <p>Créé par : <a href="">pntbr</a> / Contributeurs les plus actifs :\n                  <a href="">pntbr</a> / <a href="">wolffgang</a>\n                </p>\n                <p>\n                 ' + (type === 'file' ? '<a href="' + prose_url + '">Editer la fiche</a> - ' : '') + '\n                 <a href="' + git_url + '">Voir sur Github</a>\n                </p>\n              </div>\n              <!--si <image--></image-->\n              <img src="http://placehold.it/350x150">\n              <!--/si image-->\n              <p class="gh-list-excerpt">Le début de la fiche qui parle de ...</p>\n              <a class="gh-list-readmore"\n                title="Lire la suite de la fiche Titre de la fiche"\n                href="' + url + '">Lire la fiche</a>\n            </article>';
-      }).join('\n'));
-      template.folders.renderAsync(template.folders._htmlTpl);
-    });
-  };
-}
-'use strict';
-
-{
-  template.create('parentRepo');
-
-  template.parentRepo.data = function () {
-    var _router$params = router.params;
-    var owner = _router$params.owner;
-    var repo = _router$params.repo;
-    var branch = _router$params.branch;
-    var path = _router$params.path;
-    var _link$label = {
-      link: '#' + owner + '/' + repo + '/tree/' + branch + '/' + ('' + path.replace(/(\/|)[0-9A-Za-z\u00C0-\u017F\-\_\.]*$/, '')),
-      label: '' + owner + ' - ' + repo
+  (function () {
+    var htmlContribWithMetas = function htmlContribWithMetas(_ref) {
+      var url = _ref.url;
+      var title = _ref.title;
+      var authors = _ref.authors;
+      var git_url = _ref.git_url;
+      var prose_url = _ref.prose_url;
+      var image_url = _ref.image_url;
+      var description = _ref.description;
+      return '<article class="gh-list-item gh-type-file">\n       <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n       <div class="gh-list-meta">\n         <p>Créé par : ' + authors + '</p>\n         <p>\n           <a href="' + prose_url + '">Editer la fiche</a>\n           <a href="' + git_url + '">Voir sur Github</a>\n         </p>\n       </div>\n       <img src="' + image_url + '">\n       <p class="gh-list-excerpt">' + description + '</p>\n       <a class="gh-list-readmore"\n         title="Lire la suite de la fiche Titre de la fiche"\n         href="#' + url + '">Lire la fiche</a>\n     </article>';
     };
-    var link = _link$label.link;
-    var label = _link$label.label;
 
-    template.parentRepo.html('À retrouver dans le dépôt : <a href="' + link + '">' + label + '</a>');
-  };
-}
-'use strict';
+    var htmlContribNoMetas = function htmlContribNoMetas(_ref2) {
+      var url = _ref2.url;
+      var title = _ref2.title;
+      return '<article class="gh-list-item gh-type-file">\n        <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n     </article>';
+    };
 
-{
-  template.create('repos');
+    var htmlFolderWithMetas = function htmlFolderWithMetas(_ref3) {
+      var url = _ref3.url;
+      var title = _ref3.title;
+      var folders = _ref3.folders;
+      var files = _ref3.files;
+      var contributors = _ref3.contributors;
+      var git_url = _ref3.git_url;
+      var image_url = _ref3.image_url;
+      var description = _ref3.description;
+      return '<article class="gh-list-item gh-type-repo">\n          <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n          <div class="gh-list-meta">\n            <p>Dossiers : ' + folders + ' - Fiches : ' + files + '</p>\n            <p>Contributeurs : ' + contributors + '</p>\n            </p>\n            <p>\n              <a href="' + git_url + '">Voir sur Github</a>\n            </p>\n          </div>\n          <img src="' + image_url + '">\n          <p class="gh-list-excerpt">' + description + '</p>\n          <a class="gh-list-readmore"\n              title="Lire la suite de la fiche Titre de la fiche"\n              href="#' + url + '">Lire la présentation complète</a>\n        </article>';
+    };
+    var htmlFolderNoMetas = function htmlFolderNoMetas(_ref4) {
+      var url = _ref4.url;
+      var title = _ref4.title;
+      return '<article class="gh-list-item gh-type-repo">\n      <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n    </article>';
+    };
 
-  template.repos.data = function () {
-    var reposUrl = new GithubUrl(router.params).toGhRepoApiUrl();
-    var html = [];
-    fetch(reposUrl, { headers: { Accept: 'application/vnd.github.v3' } }).then(function (response) {
-      return response.json();
-    }).then(function (json) {
-      var ressources = json.map(function (_ref) {
-        var name = _ref.name;
-        var type = _ref.type;
-        var html_url = _ref.html_url;
-        var url = _ref.url;
+    template.create('folders');
 
-        var readmeUrl = { owner: router.params.owner, repo: name, branch: 'master', path: 'README.md' };
-        var apiUrl = new GithubUrl(readmeUrl).toGhApiUrl();
-        fetch(apiUrl, { headers: { Accept: 'application/vnd.github.v3.raw' } }).then(function (response) {
-          return response.text();
-        }).then(function (md) {
-          var contribution = new Markdown(md);
-          var url = html_url.replace('https://github.com/', '');
-          var git_url = html_url;
-          var readme_url = html_url.replace('https://github.com/', '') + '/blob/master/README.md';
-          var bandeau_url = contribution.metas.bandeau_url;
-          var description = contribution.metas.description;
-          var contributeurs = contribution.metas.contributeurs;
-          var dossiers = contribution.metas.dossiers;
-          var fiches = contribution.metas.fiches;
-          html.push('<article class="gh-list-item gh-type-repo">\n                    <h2 class="gh-list-title"><a href="#' + url + '">' + name + '</a></h2>\n                    <div class="gh-list-meta">\n                      <p>Dossiers : ' + dossiers + ' - Fiches : ' + fiches + '</p>\n                      <p>Contributeurs : ' + contributeurs + '</p>\n                      </p>\n                      <p>\n                        <a href="' + git_url + '">Voir sur Github</a>\n                      </p>\n                    </div>\n                    <img src="' + (bandeau_url ? bandeau_url : 'http://lorempixel.com/g/350/150/') + '">\n                    <p class="gh-list-excerpt">' + description + '</p>\n                    <a class="gh-list-readmore"\n                        title="Lire la suite de la fiche Titre de la fiche"\n                        href="#' + readme_url + '">Lire la présentation complète</a>\n                  </article>');
-          template.repos.html(html.join('\n'));
-          template.repos.renderAsync(template.repos._htmlTpl);
+    template.folders.data = function () {
+      var ghApi = new GithubUrl(router.params);
+      var html = [];
+      ghApi.getJsonFolders().then(function (jsonResponse) {
+        jsonResponse.map(function (_ref5) {
+          var name = _ref5.name;
+          var type = _ref5.type;
+          var html_url = _ref5.html_url;
+
+          if (type === 'file') {
+            var readmeUrl = { owner: router.params.owner, repo: router.params.repo, branch: 'master', path: '' + (router.params.path ? '' + router.params.path + '/' + name : name) };
+            var ghApiBlob = new GithubUrl(readmeUrl);
+            ghApiBlob.getMdBlob().then(function (mdResponse) {
+              var contribution = new Markdown(mdResponse);
+              if (contribution.isMetas()) {
+                var metas = {
+                  prose_url: ('http://prose.io/#' + html_url.match(/^https:\/\/github.com\/(.*)/)[1]).replace('blob', 'edit'),
+                  git_url: html_url,
+                  url: '' + html_url.match(/^https:\/\/github.com\/(.*)/)[1],
+                  description: contribution.metas.description,
+                  title: contribution.metas.title || name,
+                  authors: contribution.metas.authors,
+                  image_url: contribution.metas.image_url || 'http://lorempixel.com/g/350/150/'
+                };
+                html.push(htmlContribWithMetas(metas));
+              } else {
+                var noMetas = {
+                  title: name,
+                  url: '' + html_url.match(/^https:\/\/github.com\/(.*)/)[1]
+                };
+                html.push(htmlContribNoMetas(noMetas));
+              }
+              template.folders.html(html.join('\n'));
+              template.folders.renderAsync(template.folders._htmlTpl);
+            });
+          } else {
+            var readmeUrl = { owner: router.params.owner, repo: name, branch: 'master', path: '' + (router.params.path ? '' + router.params.path + '/README.md' : 'README.md') };
+            var ghApiBlob = new GithubUrl(readmeUrl);
+            ghApiBlob.getMdBlob().then(function (mdResponse) {
+              var contribution = new Markdown(mdResponse);
+              if (contribution.isMetas()) {
+                var metas = {
+                  url: '' + html_url.match(/^https:\/\/github.com\/(.*)/)[1],
+                  title: contribution.metas.title || name,
+                  git_url: html_url,
+                  folders: 12,
+                  files: 5,
+                  contributors: contribution.metas.contributors,
+                  description: 'Lorem ipsum',
+                  image_url: '' || 'http://lorempixel.com/g/350/150/'
+                };
+                html.push(htmlFolderWithMetas(metas));
+              } else {
+                var noMetas = {
+                  title: name,
+                  url: '' + html_url.match(/^https:\/\/github.com\/(.*)/)[1]
+                };
+                html.push(htmlFolderNoMetas(noMetas));
+              }
+              template.folders.html(html.join('\n'));
+              template.folders.renderAsync(template.folders._htmlTpl);
+            });
+          }
         });
       });
-    });
-  };
+    };
+  })();
+}
+'use strict';
+
+{
+  (function () {
+    var htmlWithMetas = function htmlWithMetas(_ref) {
+      var url = _ref.url;
+      var title = _ref.title;
+      var folders = _ref.folders;
+      var files = _ref.files;
+      var contributors = _ref.contributors;
+      var git_url = _ref.git_url;
+      var image_url = _ref.image_url;
+      var description = _ref.description;
+      var readme_url = _ref.readme_url;
+      return '<article class="gh-list-item gh-type-repo">\n      <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n      <div class="gh-list-meta">\n        <p>Dossiers : ' + folders + ' - Fiches : ' + files + '</p>\n        <p>Contributeurs : ' + contributors + '</p>\n        </p>\n        <p>\n          <a href="' + git_url + '">Voir sur Github</a>\n        </p>\n      </div>\n      <img src="' + image_url + '">\n      <p class="gh-list-excerpt">' + description + '</p>\n      <a class="gh-list-readmore"\n          title="Lire la suite de la fiche Titre de la fiche"\n          href="#' + readme_url + '">Lire la présentation complète</a>\n    </article>';
+    };
+
+    var htmlNoMetas = function htmlNoMetas(_ref2) {
+      var url = _ref2.url;
+      var title = _ref2.title;
+      return '<article class="gh-list-item gh-type-repo">\n      <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n    </article>';
+    };
+
+    template.create('repos');
+
+    template.repos.data = function () {
+      var ghApi = new GithubUrl(router.params);
+      var html = [];
+      ghApi.getJsonRepo().then(function (jsonResponse) {
+        jsonResponse.map(function (_ref3) {
+          var name = _ref3.name;
+          var type = _ref3.type;
+          var html_url = _ref3.html_url;
+          var url = _ref3.url;
+
+          var readmeUrl = { owner: router.params.owner, repo: name, branch: 'master', path: 'README.md' };
+          var ghApiBlob = new GithubUrl(readmeUrl);
+          ghApiBlob.getMdBlob().then(function (mdResponse) {
+            var contribution = new Markdown(mdResponse);
+            if (contribution.isMetas()) {
+              var metas = {
+                url: html_url.replace('https://github.com/', ''),
+                git_url: html_url,
+                readme_url: html_url.replace('https://github.com/', '') + '/blob/master/README.md',
+                title: contribution.metas.title,
+                image_url: contribution.metas.image_url || 'http://lorempixel.com/g/350/150/',
+                description: contribution.metas.description,
+                contributors: contribution.metas.contributors,
+                folders: contribution.metas.folders,
+                files: contribution.metas.files
+              };
+              console.log('metas', contribution.metas);
+              html.push(htmlWithMetas(metas));
+            } else {
+              var noMetas = {
+                url: html_url.replace('https://github.com/', ''),
+                title: name
+              };
+              html.push(htmlNoMetas(noMetas));
+            }
+            template.repos.html(html.join('\n'));
+            template.repos.renderAsync(template.repos._htmlTpl);
+          });
+        });
+      });
+    };
+  })();
 }
 'use strict';
 
@@ -754,46 +971,72 @@ template.crews.data = function () {
 function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }
 
 {
-  template.create('searchList');
+  (function () {
+    var htmlWithMetas = function htmlWithMetas(_ref) {
+      var url = _ref.url;
+      var title = _ref.title;
+      var authors = _ref.authors;
+      var prose_url = _ref.prose_url;
+      var git_url = _ref.git_url;
+      var image_url = _ref.image_url;
+      var description = _ref.description;
+      return '<article class="gh-list-item gh-type-file">\n       <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n       <div class="gh-list-meta">\n         <p>Créé par : ' + authors + '</p>\n         <p>\n           <a href="' + prose_url + '">Editer la fiche</a>\n           <a href="' + git_url + '">Voir sur Github</a>\n         </p>\n       </div>\n       <img src="' + image_url + '">\n       <p class="gh-list-excerpt">' + description + '</p>\n       <a class="gh-list-readmore"\n         title="Lire la suite de la fiche Titre de la fiche"\n         href="#' + url + '">Lire la fiche</a>\n     </article>';
+    };
 
-  template.searchList.data = function () {
-    var _router$queries$q$match = router.queries.q.match(/(.*)\+language:Markdown\+user:([0-9A-Za-z\u00C0-\u017F\-\_\.]*)/);
+    var htmlNoMetas = function htmlNoMetas(_ref2) {
+      var url = _ref2.url;
+      var title = _ref2.title;
+      return '<article class="gh-list-item gh-type-file">\n        <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n     </article>';
+    };
 
-    var _router$queries$q$match2 = _slicedToArray(_router$queries$q$match, 3);
+    template.create('searchList');
+    template.searchList.data = function () {
+      var _router$queries$q$match = router.queries.q.match(/(.*)\+language:Markdown\+user:([0-9A-Za-z\u00C0-\u017F\-\_\.]*)/);
 
-    var req = _router$queries$q$match2[0];
-    var query = _router$queries$q$match2[1];
-    var user = _router$queries$q$match2[2];
+      var _router$queries$q$match2 = _slicedToArray(_router$queries$q$match, 3);
 
-    router.params.owner = user;
-    var apiUrl = new GithubUrl(router.params).toGhApiSearch(query);
-    fetch(apiUrl, { headers: { Accept: 'application/vnd.github.v3.html' } }).then(function (response) {
-      return response.json();
-    }).then(function (json) {
-      var ressources = json.items.map(function (_ref) {
-        var name = _ref.name;
-        var type = _ref.type;
-        var path = _ref.path;
-        var html_url = _ref.html_url;
-        var repository = _ref.repository;
-        return {
-          name: name,
-          type: type,
-          prose_url: ('http://prose.io/#' + html_url.match(/^https:\/\/github.com\/(.*)/)[1]).replace('blob', 'edit'),
-          git_url: html_url,
-          url: '' + repository.full_name + '/blob/master/' + path
-        };
+      var req = _router$queries$q$match2[0];
+      var query = _router$queries$q$match2[1];
+      var user = _router$queries$q$match2[2];
+
+      router.params.owner = user;
+      var ghApi = new GithubUrl(router.params);
+      var html = [];
+      ghApi.getJsonSearch(query).then(function (jsonResponse) {
+        jsonResponse.items.map(function (_ref3) {
+          var name = _ref3.name;
+          var path = _ref3.path;
+          var html_url = _ref3.html_url;
+          var repository = _ref3.repository;
+
+          var readmeUrl = { owner: router.params.owner, repo: repository.name, branch: 'master', path: path };
+          var ghApiBlob = new GithubUrl(readmeUrl);
+          ghApiBlob.getMdBlob().then(function (mdResponse) {
+            var contribution = new Markdown(mdResponse);
+            if (contribution.isMetas()) {
+              var metas = {
+                prose_url: ('http://prose.io/#' + html_url.match(/^https:\/\/github.com\/(.*)/)[1]).replace('blob', 'edit'),
+                git_url: html_url,
+                url: '' + repository.full_name + '/blob/master/' + path,
+                description: contribution.metas.description,
+                title: contribution.metas.title,
+                authors: contribution.metas.contributors,
+                image_url: contribution.metas.image_url || 'http://lorempixel.com/g/350/150/'
+              };
+              html.push(htmlWithMetas(metas));
+            } else {
+              var noMetas = {
+                title: name,
+                url: '' + repository.full_name + '/blob/master/' + path
+              };
+              html.push(htmlNoMetas(noMetas));
+            }
+            template.searchList.html(html.join('\n'));
+            template.searchList.renderAsync(template.searchList._htmlTpl);
+          });
+        });
       });
-      template.searchList.html(ressources.map(function (_ref2) {
-        var type = _ref2.type;
-        var name = _ref2.name;
-        var url = _ref2.url;
-        var prose_url = _ref2.prose_url;
-        var git_url = _ref2.git_url;
-        return '<article class="gh-list-item gh-type-' + type + '">\n              <h2 class="gh-list-title"><a href="#' + url + '">' + name + '</a></h2>\n              <div class="gh-list-meta">\n                <p>Mis à jour le : 02/02/16</p>\n                <p>Créé par : <a href="">pntbr</a> / Contributeurs les plus actifs :\n                  <a href="">pntbr</a> / <a href="">wolffgang</a>\n                </p>\n                <p>\n                 ' + (type === 'file' ? '<a href="' + prose_url + '">Editer la fiche</a> - ' : '') + '\n                 <a href="' + git_url + '">Voir sur Github</a>\n                </p>\n              </div>\n              <!--si <image--></image-->\n              <img src="http://placehold.it/350x150">\n              <!--/si image-->\n              <p class="gh-list-excerpt">Le début de la fiche qui parle de ...</p>\n              <a class="gh-list-readmore"\n                title="Lire la suite de la fiche Titre de la fiche"\n                href="' + url + '">Lire la fiche</a>\n            </article>';
-      }).join('\n'));
-      template.searchList.renderAsync(template.searchList._htmlTpl);
-    });
-  };
+    };
+  })();
 }
 

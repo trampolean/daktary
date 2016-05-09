@@ -19,7 +19,6 @@ babel \
   ./src/tpl-contribution.js \
   ./src/tpl-crews.js \
   ./src/tpl-folders.js \
-  ./src/tpl-parentRepo.js \
   ./src/tpl-repos.js \
   ./src/tpl-search.js \
   ./src/tpl-searchList.js > dist/dk.js
@@ -34,7 +33,6 @@ uglifycss \
   ./css/layout-home.css \
   ./css/layout-repositories.css \
   ./css/tpl-contribution.css \
-  ./css/tpl-parentRepo.css \
   ./css/tpl-crews.css \
   ./css/tpl-search.css \
   ./css/tpl-breadcrumb.css \

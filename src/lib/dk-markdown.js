@@ -2,20 +2,34 @@ class Markdown {
   constructor(content) {
     this.content = content
     this.metas = {}
-    if (this._isMetas()) {
+    if (this.isMetas()) {
       this._extractMetas()
     }
   }
-  _isMetas() {
+  isMetas() {
     return !! this.content.match(/---([\s\S]*?)---/)
   }
   _extractMetas() {
-    this.content.match(/---([\s\S]*?)---/)[1]
-      .split('\n')
-      .filter(elt => elt.trim())
+    let labelList = ''
+    this.content.match(/---([\s\S]*?)---/)[1].split('\n')
       .map(elt => {
-        const [, key, value] = elt.match(/([\s\S]*?): (.*)/)
-        this.metas[key.trim()] = value.trim()
+        if (!! elt.match(/^\w+:$/)) {
+          console.log('elt ul', elt)
+          console.log('labelList ul', labelList)
+          const [, label] = elt.match(/^(\w+):$/)
+          this.metas[label] = []
+          labelList = label
+        }
+        if (elt.match(/^  - [\s\S]*?$/)) {
+          console.log('elt', elt)
+          console.log('labelList', labelList)
+          const [, content] = elt.match(/^  - ([\s\S]*?)$/)
+          this.metas[labelList].push(content)
+        }
+        if (elt.match(/^\w+: [\s\S]*?$/)) {
+          const [, label, content] = elt.match(/^(\w+): ([\s\S]*?)$/)
+          this.metas[label] = content.trim()
+        }
       })
   }
 }
