@@ -245,9 +245,6 @@ var Markdown = (function () {
       var labelList = '';
       this.content.match(/---([\s\S]*?)---/)[1].split('\n').map(function (elt) {
         if (!!elt.match(/^\w+:$/)) {
-          console.log('elt ul', elt);
-          console.log('labelList ul', labelList);
-
           var _elt$match = elt.match(/^(\w+):$/);
 
           var _elt$match2 = _slicedToArray(_elt$match, 2);
@@ -258,9 +255,6 @@ var Markdown = (function () {
           labelList = label;
         }
         if (elt.match(/^  - [\s\S]*?$/)) {
-          console.log('elt', elt);
-          console.log('labelList', labelList);
-
           var _elt$match3 = elt.match(/^  - ([\s\S]*?)$/);
 
           var _elt$match32 = _slicedToArray(_elt$match3, 2);
@@ -542,41 +536,19 @@ var Template = (function () {
 
 var GH_SECRET = 'M2NmYjI1YmNlOWE4MGFjN2E2NzIxZTg5YzkwMGVhZjM5NzEwN2Y2MA==';
 var GH_ID = 'NGEzOWM4YzE4NjA3NDkxNWU1NDY=';
-
-var CREWS = { crews: [{ title: 'Bienvenue sur multiBàO',
-    label: 'Accueil Multibao',
-    owner: 'multibao'
-  }, {
-    title: 'Réseau Transition BE',
-    label: 'association Réseau Transition Wallonie Bruxelles',
-    owner: 'reseautransitionwb'
-  }, {
-    title: 'Réseau Coop-tic',
-    label: 'associations Outils Réseaux (FR) et CRIE Mouscron (BE); établissement SupAgro Florac (FR)',
-    owner: 'supagroflorac'
-  }, {
-    title: 'Captain Berrotte',
-    label: 'stagiaires travaillant sur multiBàO',
-    owner: 'captain-berrotte'
-  }, {
-    title: 'Traducteurs agiles',
-    label: 'Les Traducteurs Agiles sont une communauté d’Agilistes et de … Traducteurs.',
-    owner: 'les-traducteurs-agiles'
-  }, {
-    title: 'Onpassealacte',
-    label: 'Media web citoyen montrant des initiatives positives en vidéos',
-    owner: 'onpassealacte'
-  }] };
 'use strict';
 
 window.addEventListener('hashchange', function () {
-  return window.location.reload(true);
+  var ghUrl = window.location.toString().split('#')[1];
+  router.go(ghUrl);
 });
+
 window.addEventListener('load', function () {
   var ghUrl = window.location.toString().split('#')[1];
   router.go(ghUrl);
   if (router.isNoRoute()) {
     window.location = './404.html';
+    window.location.reload(true);
   }
 });
 var template = new Template();
@@ -595,7 +567,7 @@ var layout = new Layout();
 
 {
   layout.create('home');
-  layout.home.html('\n  <header class="clearfix">\n    <h1>multi<span>BàO</span></h1>\n  </header>\n  <main>\n    <section class="home-intro">\n        <h2>Partager en équipe et au monde <span>ses apprentissages sur le faire ensemble</span></h2>\n        <a href="#multibao/contributions/blob/master/pages/commencer_ici.md">Commencer ici</a>\n        <a href="#multibao/documentation/blob/master/README.md">Guide d\'utilisation</a>\n    </section>\n    <section id="gh-crew-list" data-template="crews">\n    </section>\n  </main>');
+  layout.home.html('\n  <header class="clearfix">\n    <h1>multi<span>BàO</span></h1>\n  </header>\n  <main>\n    <section class="home-intro">\n        <h2>Partager en équipe et au monde <span>ses apprentissages sur le faire ensemble</span></h2>\n        <a href="#multibao/contributions/blob/master/pages/commencer_ici.md">Commencer ici</a>\n        <a href="#multibao/documentation/blob/master/README.md">Guide d\'utilisation</a>\n    </section>\n    <section id="gh-crew-list">\n    <ul data-template="crews">\n    </ul>\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -741,30 +713,45 @@ router.route(':owner', function () {
 */
 'use strict';
 
-var crewsWithSelectedClass = function crewsWithSelectedClass(owner, crews) {
-  return crews.map(function (elt) {
-    if (elt.owner === owner) {
-      elt.classAttr = 'selected';
-    }
-    return elt;
-  });
-};
-template.create('crews');
-template.crews.data = function () {
-  var ownerRoute = router.params.owner;
-  var _crews = { crews: crewsWithSelectedClass(ownerRoute, CREWS.crews) };
-  var crews = _crews.crews;
+{
+  (function () {
+    var htmlWithMetas = function htmlWithMetas(_ref) {
+      var title = _ref.title;
+      var label = _ref.label;
+      var owner = _ref.owner;
+      var classAttr = _ref.classAttr;
+      return '<li><a title="' + title + '" href="#' + owner + '" data-owner="' + owner + '">\n       <h3>' + label + '</h3><p>' + title + '</p></a>\n     </li>';
+    };
 
-  template.crews.html('<ul>' + crews.map(function (_ref) {
-    var title = _ref.title;
-    var repo = _ref.repo;
-    var label = _ref.label;
-    var link = _ref.link;
-    var owner = _ref.owner;
-    var classAttr = _ref.classAttr;
-    return '<li><a title="' + title + '" class="' + classAttr + '" href="#' + owner + '"' + (' data-owner="' + owner + '"><h3>' + label + '</h3><p>' + title + '</p></a></li>');
-  }).join('\n') + '</ul>');
-};
+    template.create('crews');
+    template.crews.data = function () {
+      var ghApi = new GithubUrl({ owner: 'multibao', repo: 'organisations' });
+      var html = [];
+      ghApi.getJsonFolders().then(function (jsonResponse) {
+        jsonResponse.map(function (elt) {
+          if (elt.name === 'README.md') {
+            return;
+          }
+          var readmeUrl = { owner: 'multibao', repo: 'organisations', branch: 'master', path: elt.name };
+          var ghApiBlob = new GithubUrl(readmeUrl);
+          ghApiBlob.getMdBlob().then(function (mdResponse) {
+            var contribution = new Markdown(mdResponse);
+            if (contribution.isMetas()) {
+              var metas = {
+                label: contribution.metas.label,
+                title: contribution.metas.title,
+                owner: contribution.metas.owner
+              };
+              html.push(htmlWithMetas(metas));
+            }
+            template.crews.html(html.join('\n'));
+            template.crews.renderAsync(template.crews._htmlTpl);
+          });
+        });
+      });
+    };
+  })();
+}
 'use strict';
 
 {
@@ -924,7 +911,6 @@ template.crews.data = function () {
                 folders: contribution.metas.folders,
                 files: contribution.metas.files
               };
-              console.log('metas', contribution.metas);
               html.push(htmlWithMetas(metas));
             } else {
               var noMetas = {
