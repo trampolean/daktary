@@ -14,15 +14,11 @@ class Markdown {
     this.content.match(/---([\s\S]*?)---/)[1].split('\n')
       .map(elt => {
         if (!! elt.match(/^\w+:$/)) {
-          console.log('elt ul', elt)
-          console.log('labelList ul', labelList)
           const [, label] = elt.match(/^(\w+):$/)
           this.metas[label] = []
           labelList = label
         }
         if (elt.match(/^  - [\s\S]*?$/)) {
-          console.log('elt', elt)
-          console.log('labelList', labelList)
           const [, content] = elt.match(/^  - ([\s\S]*?)$/)
           this.metas[labelList].push(content)
         }
