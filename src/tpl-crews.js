@@ -4,23 +4,39 @@
 * @param {String} An HTML string representing a github Url contribution.
 * @result {Array} A array with each crew Object.
 */
-const crewsWithSelectedClass = (owner, crews) => {
-  return crews.map(elt => {
-    if (elt.owner === owner) {
-      elt.classAttr = 'selected'
-    }
-    return elt
-  })
-}
-template.create('crews')
-template.crews.data = () => {
-  const ownerRoute = router.params.owner
-  const {crews} = {crews: crewsWithSelectedClass(ownerRoute, CREWS.crews)}
-  template.crews.html(
-    `<ul>` +
-       crews.map(({title, repo, label, link, owner, classAttr}) =>
-        `<li><a title="${title}" class="${classAttr}" href="#${owner}"` +
-        ` data-owner="${owner}"><h3>${label}</h3><p>${title}</p></a></li>`
-       ).join('\n') +
-    `</ul>`)
+{
+  const htmlWithMetas = ({title, label, owner, classAttr}) =>
+    `<li><a title="${title}" href="#${owner}" data-owner="${owner}">
+       <h3>${label}</h3><p>${title}</p></a>
+     </li>`
+
+  template.create('crews')
+  template.crews.data = () => {
+    const ghApi = new GithubUrl({owner: 'multibao', repo: 'organisations' })
+    const html = []
+    ghApi.getJsonFolders()
+      .then(jsonResponse => {
+        jsonResponse.map((elt) => {
+          if (elt.name === 'README.md') {
+            return
+          }
+          const readmeUrl = {owner: 'multibao', repo: 'organisations', branch: 'master', path: elt.name}
+          const ghApiBlob = new GithubUrl(readmeUrl)
+          ghApiBlob.getMdBlob()
+            .then(mdResponse => {
+              const contribution = new Markdown(mdResponse)
+              if (contribution.isMetas()) {
+                const metas = {
+                  label: contribution.metas.label,
+                  title: contribution.metas.title,
+                  owner: contribution.metas.owner
+                }
+                html.push(htmlWithMetas(metas))
+              }
+              template.crews.html(html.join('\n'))
+              template.crews.renderAsync(template.crews._htmlTpl)
+            })
+        })
+      })
+  }
 }
