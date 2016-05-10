@@ -46,7 +46,6 @@
                 folders: contribution.metas.folders,
                 files: contribution.metas.files
               }
-              console.log('metas', contribution.metas)
               html.push(htmlWithMetas(metas))
             } else {
               const noMetas = {
