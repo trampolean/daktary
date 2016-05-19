@@ -6,7 +6,7 @@
   layout.create('folders')
   layout.folders.html(`
   <header>
-    <h1>multi<span>BàO</span></h1>
+    <h1><a href="">multi<span>BàO</span></a></h1>
     <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">
     </div>
   </header>
