@@ -1,6 +1,21 @@
 /*
 CONTRIBUTIONS
 */
+
+.contribution-tools {
+  position: fixed;
+  height: 100vh;
+  padding-top: 45px;
+  margin-left: -50px;
+}
+.contribution-tools a {
+  display: block;
+}
+.page-top {
+  position: absolute;
+  bottom: 10px;
+}
+
 #contribution {
   font-family: "Sentinel SSm A", "Sentinel SSm B", Palatino Linotype, Book Antiqua, Palatino, serif;
   content: "medium";

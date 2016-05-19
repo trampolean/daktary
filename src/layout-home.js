@@ -2,7 +2,7 @@
   layout.create('home')
   layout.home.html(`
   <header class="clearfix">
-    <h1><a href="">multi<span>BàO</span></a></h1>
+    <h1>multi<span>BàO</span></h1>
   </header>
   <main>
     <section class="home-intro">

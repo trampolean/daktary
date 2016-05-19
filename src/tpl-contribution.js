@@ -1,5 +1,10 @@
 {
   const html = ({link, label, html}) => `
+    <aside class="contribution-tools">
+      <a href="">Voir sur Github</a>
+      <a href="">Editer sur prose.io</a>
+      <a href="" class="page-top">Haut de page</a>
+    </aside>
     <div id="parentRepo" class="breadcrumbs">
       À retrouver dans le dépôt : <a href="${link}">${label}</a>
     </div>
