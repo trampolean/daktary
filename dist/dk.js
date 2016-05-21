@@ -536,6 +536,8 @@ var Template = (function () {
 
 var GH_SECRET = 'M2NmYjI1YmNlOWE4MGFjN2E2NzIxZTg5YzkwMGVhZjM5NzEwN2Y2MA==';
 var GH_ID = 'NGEzOWM4YzE4NjA3NDkxNWU1NDY=';
+
+var OWNER = 'multibao';
 'use strict';
 
 window.addEventListener('hashchange', function () {
@@ -725,14 +727,14 @@ router.route(':owner', function () {
 
     template.create('crews');
     template.crews.data = function () {
-      var ghApi = new GithubUrl({ owner: 'multibao', repo: 'organisations' });
+      var ghApi = new GithubUrl({ owner: OWNER, repo: 'organisations' });
       var html = [];
       ghApi.getJsonFolders().then(function (jsonResponse) {
         jsonResponse.map(function (elt) {
           if (elt.name === 'README.md') {
             return;
           }
-          var readmeUrl = { owner: 'multibao', repo: 'organisations', branch: 'master', path: elt.name };
+          var readmeUrl = { owner: OWNER, repo: 'organisations', branch: 'master', path: elt.name };
           var ghApiBlob = new GithubUrl(readmeUrl);
           ghApiBlob.getMdBlob().then(function (mdResponse) {
             var contribution = new Markdown(mdResponse);
