@@ -537,7 +537,7 @@ var Template = (function () {
 var GH_SECRET = 'M2NmYjI1YmNlOWE4MGFjN2E2NzIxZTg5YzkwMGVhZjM5NzEwN2Y2MA==';
 var GH_ID = 'NGEzOWM4YzE4NjA3NDkxNWU1NDY=';
 
-var OWNER = 'multibao';
+var OWNER = 'daktary-team';
 'use strict';
 
 window.addEventListener('hashchange', function () {
