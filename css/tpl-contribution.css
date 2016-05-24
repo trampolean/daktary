@@ -48,6 +48,11 @@ CONTRIBUTIONS
   background-size: 32px;
 }
 
+#parentRepo {
+  padding-top: 10px;
+  text-align: center;
+}
+
 #contribution {
   font-family: "Sentinel SSm A", "Sentinel SSm B", Palatino Linotype, Book Antiqua, Palatino, serif;
   content: "medium";
@@ -90,8 +95,7 @@ CONTRIBUTIONS
 #contribution ul,
 #contribution ol,
 #contribution pre,
-#contribution table,
-#contribution blockquote {
+#contribution table{
   margin-top: 1.75rem;
   margin-bottom: 1.75rem;
   font-size: 1.188rem;
@@ -139,8 +143,18 @@ CONTRIBUTIONS
 #contribution a:focus {
   color: #29abe2;
   border-bottom-color: #29abe2;
-;
 }
+
+#contribution blockquote {
+  margin: 0 2em;
+  padding-left: 1em;
+  font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+  letter-spacing: .01rem;
+  font-weight: 400;
+  font-style: italic;
+  border-left: 5px solid #29abe2;
+}
+/*
 #contribution blockquote p {
   font-family: Georgia,Cambria,"Times New Roman",Times,serif;
   letter-spacing: .01rem;
@@ -151,6 +165,7 @@ CONTRIBUTIONS
   margin-left: -23px;
   padding-bottom: 3px;
 }
+*/
 
 /*
 GITHUB MARKDOWN RE-DESIGN
