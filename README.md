@@ -66,15 +66,18 @@ http://127.0.0.1:8000/tests
 * Résultats recherche : afficher repo où a été effectué la recherche
 * Résultats recherche : afficher si pas de résultat
 * Meta fiche: semantique + affichage
-* Affichage fiches : typo, justified text, couleurs
-* Affichage fiches : éléments html (img, embed, abbr, acronym, cite, code, small, sub, sup, ol)
-* Affichage fiches : tooltip sur les outils ?
+* Affichage fiches : typo, justified text
+
 * Responsive : mobile first ?
 
 * Class autour notes pied de page
 
 ## Discussion intégration
 * Regarder GitBook
+* Affichage fiches : tooltip sur les outils ?
+* Affichage fiches : lien pied de page en gras, pourquoi ?
+* Affichage fiches : embed, abbr, cite, acronym impossible en markdown ?
+* Affichage fiches : [exemple des balises HTML](http://dev.multibao.org/#newick/grill/blob/master/styleguide.md)
 
 ## Discussion PO
 * Seul les dépôts avec README sont visibles
