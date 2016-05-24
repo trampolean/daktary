@@ -68,7 +68,7 @@ http://127.0.0.1:8000/tests
 * Meta fiche: semantique + affichage
 * Affichage fiches : typo, justified text, couleurs
 * Affichage fiches : éléments html (img, embed, abbr, acronym, cite, code, small, sub, sup, ol)
-* Affichage fiches : édition prose.io, lien help, retour haut de page
+* Affichage fiches : tooltip sur les outils ?
 * Responsive : mobile first ?
 
 * Class autour notes pied de page
