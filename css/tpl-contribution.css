@@ -5,15 +5,41 @@ CONTRIBUTIONS
 .contribution-tools {
   position: fixed;
   height: 100vh;
+  width: 32px;
   padding-top: 45px;
   margin-left: -50px;
 }
 .contribution-tools a {
   display: block;
+  text-indent: -9999px;
+  opacity: .3;
+  transition: opacity 0.3s;
+}
+.contribution-tools a:hover {
+  opacity: .8;
+}
+.github-link,
+.proseio-link {
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+}
+.github-link {
+  margin-bottom: 5px;
+  background: url(../img/ico-github.svg) 0 0 no-repeat;
+  background-size: 16px;
+}
+.proseio-link {
+  background: url(../img/ico-pencil.svg) 0 0 no-repeat;
+  background-size: 16px;
 }
 .page-top {
   position: absolute;
-  bottom: 10px;
+  bottom: 50px;
+  width: 32px;
+  height: 32px;
+  background: url(../img/ico-top.svg) 0 no-repeat;
+  background-size: 32px;
 }
 
 #contribution {
