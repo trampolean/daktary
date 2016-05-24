@@ -19,7 +19,8 @@ CONTRIBUTIONS
   opacity: .8;
 }
 .github-link,
-.proseio-link {
+.proseio-link,
+.help-link {
   width: 20px;
   height: 20px;
   margin: 0 auto;
@@ -30,7 +31,12 @@ CONTRIBUTIONS
   background-size: 16px;
 }
 .proseio-link {
+  margin-bottom: 5px;
   background: url(../img/ico-pencil.svg) 0 0 no-repeat;
+  background-size: 16px;
+}
+.help-link {
+  background: url(../img/ico-question.svg) 0 0 no-repeat;
   background-size: 16px;
 }
 .page-top {

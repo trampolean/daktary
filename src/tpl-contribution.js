@@ -3,6 +3,7 @@
     <aside class="contribution-tools">
       <a href="" class="github-link">Voir sur Github</a>
       <a href="" class="proseio-link">Editer sur prose.io</a>
+      <a href="" class="help-link">Aide</a>
       <a href="" class="page-top">Haut de page</a>
     </aside>
     <div id="parentRepo" class="breadcrumbs">
