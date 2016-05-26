@@ -1,6 +1,58 @@
 /*
 CONTRIBUTIONS
 */
+
+.contribution-tools {
+  position: fixed;
+  height: 100vh;
+  width: 32px;
+  padding-top: 45px;
+  margin-left: -50px;
+}
+.contribution-tools a {
+  display: block;
+  text-indent: -9999px;
+  opacity: .3;
+  transition: opacity 0.3s;
+}
+.contribution-tools a:hover {
+  opacity: .8;
+}
+.github-link,
+.proseio-link,
+.help-link {
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+}
+.github-link {
+  margin-bottom: 5px;
+  background: url(../img/ico-github.svg) 0 0 no-repeat;
+  background-size: 16px;
+}
+.proseio-link {
+  margin-bottom: 5px;
+  background: url(../img/ico-pencil.svg) 0 0 no-repeat;
+  background-size: 16px;
+}
+.help-link {
+  background: url(../img/ico-question.svg) 0 0 no-repeat;
+  background-size: 16px;
+}
+.page-top {
+  position: absolute;
+  bottom: 50px;
+  width: 32px;
+  height: 32px;
+  background: url(../img/ico-top.svg) 0 no-repeat;
+  background-size: 32px;
+}
+
+#parentRepo {
+  padding-top: 10px;
+  text-align: center;
+}
+
 #contribution {
   font-family: "Sentinel SSm A", "Sentinel SSm B", Palatino Linotype, Book Antiqua, Palatino, serif;
   content: "medium";
@@ -42,13 +94,10 @@ CONTRIBUTIONS
 #contribution p,
 #contribution ul,
 #contribution ol,
-#contribution pre,
-#contribution table,
-#contribution blockquote {
-  margin-top: 1.75rem;
-  margin-bottom: 1.75rem;
+#contribution table{
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   font-size: 1.188rem;
-  line-height: 1.473684211em;
 }
 #contribution ul {
   margin-left: 20px;
@@ -60,6 +109,7 @@ CONTRIBUTIONS
 }
 #contribution li {
   position: relative;
+  margin-bottom: 5px;
   padding-left: 20px;
   list-style-type: none;  
 }
@@ -70,40 +120,83 @@ CONTRIBUTIONS
   top: 0;
   font-weight: bold;  
 }
+
+/*
+#contribution ol {
+  list-style: decimal;
+}
+#contribution ol li {
+  padding-left: 0;
+  list-style-type: inherit;
+}
+*/
+#contribution ol {
+  counter-reset: section;
+  list-style-type: none;
+}
+#contribution ol li:before {
+  position: relative;
+  counter-increment: section;
+  content: counters(section, ".") " ";
+}
+
 #contribution img {
   display: block;
   vertical-align: middle;
   padding: 4px;
-  max-width: 605px;
   margin: 0.75rem 0;
-  line-height: 1.42857143;
-  border: 1px solid #ddd;
+  background-color: #fff;
+  border: 1px solid #29abe2;
   border-radius: 4px;
-  -webkit-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
 }
 #contribution a {
   color: #4d4d4d;
   text-decoration: none;
   border-bottom: 1px solid #4d4d4d;
+  transition: all 0.3s
 }
 #contribution a:hover,
 #contribution a:focus {
   color: #29abe2;
   border-bottom-color: #29abe2;
-;
 }
-#contribution blockquote p {
+
+#contribution pre,
+#contribution blockquote {
+  margin: 0 2em;
+  background-color: #fff;
+}
+#contribution pre {
+  margin: 2em;
+  padding: 1em;
+  white-space: pre-wrap;
+}
+
+#contribution blockquote {
+  padding: 0.5em 1em;
   font-family: Georgia,Cambria,"Times New Roman",Times,serif;
   letter-spacing: .01rem;
   font-weight: 400;
   font-style: italic;
-  border-left: 3px solid rgba(0,0,0,0.8);
-  padding-left: 20px;
-  margin-left: -23px;
-  padding-bottom: 3px;
+  border-left: 5px solid #29abe2;
 }
+#contribution blockquote p {
+  margin: 0;
+}
+
+/*
+#contribution blockquote p {
+font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+letter-spacing: .01rem;
+font-weight: 400;
+font-style: italic;
+border-left: 3px solid rgba(0,0,0,0.8);
+padding-left: 20px;
+margin-left: -23px;
+padding-bottom: 3px;
+}
+*/
 
 /*
 GITHUB MARKDOWN RE-DESIGN

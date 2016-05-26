@@ -2,19 +2,21 @@
   const htmlWithMetas = ({url, title, folders, files, contributors, git_url, image_url, description, readme_url}) =>
     `<article class="gh-list-item gh-type-repo">
       <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
-      <div class="gh-list-meta">
-        <p>Dossiers : ${folders} - Fiches : ${files}</p>
-        <p>Contributeurs : ${contributors}</p>
-        </p>
-        <p>
-          <a href="${git_url}">Voir sur Github</a>
-        </p>
+      <div class="gh-list-content">
+        <div class="gh-list-meta">
+          <p>Dossiers : ${folders} - Fiches : ${files}</p>
+          <p>Contributeurs : ${contributors}</p>
+          </p>
+          <p>
+            <a href="${git_url}">Voir sur Github</a>
+          </p>
+        </div>
+        <img src="${image_url}">
+        <p class="gh-list-excerpt">${description}</p>
+        <a class="gh-list-readmore"
+            title="Lire la suite de la fiche Titre de la fiche"
+            href="#${readme_url}">Lire la présentation complète</a>
       </div>
-      <img src="${image_url}">
-      <p class="gh-list-excerpt">${description}</p>
-      <a class="gh-list-readmore"
-          title="Lire la suite de la fiche Titre de la fiche"
-          href="#${readme_url}">Lire la présentation complète</a>
     </article>`
 
   const htmlNoMetas = ({url, title}) =>

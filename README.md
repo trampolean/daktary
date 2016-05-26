@@ -58,23 +58,22 @@ Dans un [Firefox](https://www.mozilla.org/fr/firefox/developer/) **récent** lan
 http://127.0.0.1:8000/tests
 
 ## Intégration
-* Affichage home
-* Affichage repo
-* Affichage folder
-* Résultats recherche : nombre (en dur)
-* Résultats recherche : afficher ou non la requète
-* Résultats recherche : afficher repo où a été effectué la recherche
-* Résultats recherche : afficher si pas de résultat
-* Meta fiche: semantique + affichage
-* Affichage fiches : typo, justified text, couleurs
-* Affichage fiches : éléments html (img, embed, abbr, acronym, cite, code, small, sub, sup, ol)
-* Affichage fiches : édition prose.io, lien help, retour haut de page
-* Responsive : mobile first ?
+* Affichage fiches : typo, justified text
 
-* Class autour notes pied de page
+* Responsive : mobile first ?
 
 ## Discussion intégration
 * Regarder GitBook
+* 
+* Affichage fiches : tooltip sur les outils ?
+* Affichage fiches : lien pied de page en gras, pourquoi ?
+* Affichage fiches : embed, abbr, cite, acronym impossible en markdown ?
+* Affichage fiches : affichage des metas inutile, déjà utilisées autrement
+* Affichage fiches : affichage des notes et utilisation de #user-content-note
+* Affichage fiches : [exemple des balises HTML](http://dev.multibao.org/#newick/grill/blob/master/styleguide.md)
+* Affichage recherche : boucle if pour afficher le bon message
+* Affichage recherche : dynamiser nombre de résultat, recherche, repo
+* Affichage recherche : afficher ou non moteur de recherche
 
 ## Discussion PO
 * Seul les dépôts avec README sont visibles
