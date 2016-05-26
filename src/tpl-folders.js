@@ -4,11 +4,7 @@
        <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
        <div class="gh-list-content">
          <div class="gh-list-meta">
-           <p>Créé par : ${authors}</p>
-           <p>
-             <a href="${prose_url}">Editer la fiche</a>
-             <a href="${git_url}">Voir sur Github</a>
-           </p>
+           <p>Mise à jour par : ${authors}</p>
          </div>
          <img src="${image_url}">
          <p class="gh-list-excerpt">${description}</p>
