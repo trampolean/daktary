@@ -561,13 +561,13 @@ var layout = new Layout();
 
 {
   layout.create('folders');
-  layout.folders.html('\n  <header>\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="folders">\n    </section>\n  </main>');
+  layout.folders.html('\n  <header class="container">\n    <h1><a href="">multi<span>BàO</span></a></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="folders">\n    </section>\n  </main>');
 }
 'use strict';
 
 {
   layout.create('home');
-  layout.home.html('\n  <header class="clearfix">\n    <h1>multi<span>BàO</span></h1>\n  </header>\n  <main>\n    <section class="home-intro">\n        <h2>Partager en équipe et au monde <span>ses apprentissages sur le faire ensemble</span></h2>\n        <a href="#multibao/contributions/blob/master/pages/commencer_ici.md">Commencer ici</a>\n        <a href="#multibao/documentation/blob/master/README.md">Guide d\'utilisation</a>\n    </section>\n    <section id="gh-crew-list">\n    <ul data-template="crews">\n    </ul>\n    </section>\n  </main>');
+  layout.home.html('\n  <header class="home-header clearfix container">\n    <h1>multi<span>BàO</span></h1>\n  </header>\n  <main>\n    <section class="home-intro">\n        <div class="home-intro-content container">\n          <h2>Partager en équipe et au monde <span>ses apprentissages sur le faire ensemble</span></h2>\n          <a href="#multibao/contributions/blob/master/pages/commencer_ici.md">Commencer ici</a>\n          <a href="#multibao/documentation/blob/master/README.md">Guide d\'utilisation</a>\n        </div>\n    </section>\n    <section id="gh-crew-list" class="container">\n      <ul data-template="crews">\n      </ul>\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -577,7 +577,7 @@ var layout = new Layout();
 
 {
   layout.create('repos');
-  layout.repos.html('\n  <header>\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="repos">\n    </section>\n  </main>');
+  layout.repos.html('\n  <header class="container">\n    <h1><a href="">multi<span>BàO</span></a></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main class="container">\n    <div id="breadcrumb" class="breadcrumb" data-template="breadcrumb">\n    </div>\n    <section id="gh-list" class="gh-list" data-template="repos">\n    </section>\n  </main>');
 }
 /**
  * Layout for manage and display Github repositories.
@@ -587,7 +587,7 @@ var layout = new Layout();
 
 {
   layout.create('searchList');
-  layout.searchList.html('\n  <header>\n    <h1>multi<span>BàO</span></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main>\n    <section id="gh-list" class="gh-list" data-template="searchList">\n    </section>\n  </main>');
+  layout.searchList.html('\n  <header class="container">\n    <h1><a href="">multi<span>BàO</span></a></h1>\n    <div id="search-engine-wrapper" class="search-engine-wrapper" data-template="search">\n    </div>\n  </header>\n  <main class="container">\n    <section class="search-result search-result-blank">\n    il n\'y a pas de résultat pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    <section class="search-result">\n      <span>3</span> résultat(s) pour la recherche <span>agilité</span> dans le repo <a href=""> Super repo de démo</a>\n    </section>\n    <section id="gh-list" class="gh-list" data-template="searchList">\n    </section>\n  </main>');
 }
 /**
 * Layout for manage and display Github contribution.
@@ -597,7 +597,7 @@ var layout = new Layout();
 
 {
   layout.create('viewer');
-  layout.viewer.html('\n    <main data-template="contribution">\n    </main>\n  ');
+  layout.viewer.html('\n    <main data-template="contribution" class="container">\n    </main>\n  ');
 }
 // Create a router
 'use strict';
@@ -681,7 +681,7 @@ router.route(':owner', function () {
       var link = _ref.link;
       var label = _ref.label;
       var _html = _ref.html;
-      return '\n    <div id="parentRepo" class="breadcrumbs">\n      À retrouver dans le dépôt : <a href="' + link + '">' + label + '</a>\n    </div>\n    <article id="contribution">\n      ' + _html + '\n    </article>\n  ';
+      return '\n    <aside class="contribution-tools">\n      <a href="" class="github-link">Voir sur Github</a>\n      <a href="" class="proseio-link">Editer sur prose.io</a>\n      <a href="" class="help-link">Aide</a>\n      <a href="" class="page-top">Haut de page</a>\n    </aside>\n    <div id="parentRepo" class="breadcrumbs">\n      À retrouver dans le dépôt : <a href="' + link + '">' + label + '</a>\n    </div>\n    <article id="contribution">\n      ' + _html + '\n    </article>\n  ';
     };
 
     template.create('contribution');
@@ -764,7 +764,7 @@ router.route(':owner', function () {
       var prose_url = _ref.prose_url;
       var image_url = _ref.image_url;
       var description = _ref.description;
-      return '<article class="gh-list-item gh-type-file">\n       <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n       <div class="gh-list-meta">\n         <p>Créé par : ' + authors + '</p>\n         <p>\n           <a href="' + prose_url + '">Editer la fiche</a>\n           <a href="' + git_url + '">Voir sur Github</a>\n         </p>\n       </div>\n       <img src="' + image_url + '">\n       <p class="gh-list-excerpt">' + description + '</p>\n       <a class="gh-list-readmore"\n         title="Lire la suite de la fiche Titre de la fiche"\n         href="#' + url + '">Lire la fiche</a>\n     </article>';
+      return '<article class="gh-list-item gh-type-file">\n       <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n       <div class="gh-list-content">\n         <div class="gh-list-meta">\n           <p>Mise à jour par : ' + authors + '</p>\n         </div>\n         <img src="' + image_url + '">\n         <p class="gh-list-excerpt">' + description + '</p>\n         <a class="gh-list-readmore"\n           title="Lire la suite de la fiche : ' + title + '"\n           href="#' + url + '">Lire la fiche</a>\n       </div>\n     </article>';
     };
 
     var htmlContribNoMetas = function htmlContribNoMetas(_ref2) {
@@ -782,12 +782,12 @@ router.route(':owner', function () {
       var git_url = _ref3.git_url;
       var image_url = _ref3.image_url;
       var description = _ref3.description;
-      return '<article class="gh-list-item gh-type-repo">\n          <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n          <div class="gh-list-meta">\n            <p>Dossiers : ' + folders + ' - Fiches : ' + files + '</p>\n            <p>Contributeurs : ' + contributors + '</p>\n            </p>\n            <p>\n              <a href="' + git_url + '">Voir sur Github</a>\n            </p>\n          </div>\n          <img src="' + image_url + '">\n          <p class="gh-list-excerpt">' + description + '</p>\n          <a class="gh-list-readmore"\n              title="Lire la suite de la fiche Titre de la fiche"\n              href="#' + url + '">Lire la présentation complète</a>\n        </article>';
+      return '<article class="gh-list-item gh-type-folder">\n          <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n          <div class="gh-list-content">\n            <div class="gh-list-meta">\n              <p>Dossiers : ' + folders + ' - Fiches : ' + files + '</p>\n              <p>Contributeurs : ' + contributors + '</p>\n              </p>\n              <p>\n                <a href="' + git_url + '">Voir sur Github</a>\n              </p>\n            </div>\n            <img src="' + image_url + '">\n            <p class="gh-list-excerpt">' + description + '</p>\n            <a class="gh-list-readmore"\n                title="Lire la suite de la fiche : ' + title + '"\n                href="#' + url + '">Lire la présentation complète</a>\n          </div>\n        </article>';
     };
     var htmlFolderNoMetas = function htmlFolderNoMetas(_ref4) {
       var url = _ref4.url;
       var title = _ref4.title;
-      return '<article class="gh-list-item gh-type-repo">\n      <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n    </article>';
+      return '<article class="gh-list-item gh-type-folder">\n      <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n    </article>';
     };
 
     template.create('folders');
@@ -874,7 +874,7 @@ router.route(':owner', function () {
       var image_url = _ref.image_url;
       var description = _ref.description;
       var readme_url = _ref.readme_url;
-      return '<article class="gh-list-item gh-type-repo">\n      <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n      <div class="gh-list-meta">\n        <p>Dossiers : ' + folders + ' - Fiches : ' + files + '</p>\n        <p>Contributeurs : ' + contributors + '</p>\n        </p>\n        <p>\n          <a href="' + git_url + '">Voir sur Github</a>\n        </p>\n      </div>\n      <img src="' + image_url + '">\n      <p class="gh-list-excerpt">' + description + '</p>\n      <a class="gh-list-readmore"\n          title="Lire la suite de la fiche Titre de la fiche"\n          href="#' + readme_url + '">Lire la présentation complète</a>\n    </article>';
+      return '<article class="gh-list-item gh-type-repo">\n      <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n      <div class="gh-list-content">\n        <div class="gh-list-meta">\n          <p>Dossiers : ' + folders + ' - Fiches : ' + files + '</p>\n          <p>Contributeurs : ' + contributors + '</p>\n          </p>\n          <p>\n            <a href="' + git_url + '">Voir sur Github</a>\n          </p>\n        </div>\n        <img src="' + image_url + '">\n        <p class="gh-list-excerpt">' + description + '</p>\n        <a class="gh-list-readmore"\n            title="Lire la suite de la fiche Titre de la fiche"\n            href="#' + readme_url + '">Lire la présentation complète</a>\n      </div>\n    </article>';
     };
 
     var htmlNoMetas = function htmlNoMetas(_ref2) {
@@ -966,7 +966,7 @@ function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else i
       var git_url = _ref.git_url;
       var image_url = _ref.image_url;
       var description = _ref.description;
-      return '<article class="gh-list-item gh-type-file">\n       <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n       <div class="gh-list-meta">\n         <p>Créé par : ' + authors + '</p>\n         <p>\n           <a href="' + prose_url + '">Editer la fiche</a>\n           <a href="' + git_url + '">Voir sur Github</a>\n         </p>\n       </div>\n       <img src="' + image_url + '">\n       <p class="gh-list-excerpt">' + description + '</p>\n       <a class="gh-list-readmore"\n         title="Lire la suite de la fiche Titre de la fiche"\n         href="#' + url + '">Lire la fiche</a>\n     </article>';
+      return '<article class="gh-list-item gh-type-file">\n       <h2 class="gh-list-title"><a href="#' + url + '">' + title + '</a></h2>\n       <div class="gh-list-content">\n         <div class="gh-list-meta">\n           <p>Créé par : ' + authors + '</p>\n         </div>\n         <img src="' + image_url + '">\n         <p class="gh-list-excerpt">' + description + '</p>\n         <a class="gh-list-readmore"\n           title="Lire la suite de la fiche : $(titre)"\n           href="#' + url + '">Lire la fiche</a>\n       </div>\n     </article>';
     };
 
     var htmlNoMetas = function htmlNoMetas(_ref2) {

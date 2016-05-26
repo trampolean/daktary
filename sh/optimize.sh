@@ -36,4 +36,6 @@ uglifycss \
   ./css/tpl-crews.css \
   ./css/tpl-search.css \
   ./css/tpl-breadcrumb.css \
-  ./css/tpl-list.css > dist/dk.min.css
+  ./css/tpl-list.css \
+  ./css/tpl-folder.css \
+  ./css/tpl-searchList.css > dist/dk.min.css
