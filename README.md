@@ -59,18 +59,18 @@ http://127.0.0.1:8000/tests
 
 ## Intégration
 * Affichage home
-* Meta fiche: semantique + affichage
 * Affichage fiches : typo, justified text
 
 * Responsive : mobile first ?
 
-* Class autour notes pied de page
-
 ## Discussion intégration
 * Regarder GitBook
+* 
 * Affichage fiches : tooltip sur les outils ?
 * Affichage fiches : lien pied de page en gras, pourquoi ?
 * Affichage fiches : embed, abbr, cite, acronym impossible en markdown ?
+* Affichage fiches : affichage des metas inutile, déjà utilisées autrement
+* Affichage fiches : affichage des notes et utilisation de #user-content-note
 * Affichage fiches : [exemple des balises HTML](http://dev.multibao.org/#newick/grill/blob/master/styleguide.md)
 * Affichage recherche : boucle if pour afficher le bon message
 * Affichage recherche : dynamiser nombre de résultat, recherche, repo
