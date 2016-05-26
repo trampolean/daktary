@@ -43,7 +43,7 @@
           </div>
         </article>`
   const htmlFolderNoMetas = ({url, title}) =>
-    `<article class="gh-list-item gh-type-repo">
+    `<article class="gh-list-item gh-type-folder">
       <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
     </article>`
 
