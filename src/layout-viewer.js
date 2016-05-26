@@ -5,7 +5,7 @@
 {
   layout.create('viewer')
   layout.viewer.html(`
-    <main data-template="contribution">
+    <main data-template="contribution" class="container">
     </main>
   `)
 }
