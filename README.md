@@ -58,7 +58,6 @@ Dans un [Firefox](https://www.mozilla.org/fr/firefox/developer/) **récent** lan
 http://127.0.0.1:8000/tests
 
 ## Intégration
-* Affichage home
 * Affichage fiches : typo, justified text
 
 * Responsive : mobile first ?
