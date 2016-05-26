@@ -59,12 +59,6 @@ http://127.0.0.1:8000/tests
 
 ## Intégration
 * Affichage home
-* Affichage repo
-* Affichage folder
-* Résultats recherche : nombre (en dur)
-* Résultats recherche : afficher ou non la requète
-* Résultats recherche : afficher repo où a été effectué la recherche
-* Résultats recherche : afficher si pas de résultat
 * Meta fiche: semantique + affichage
 * Affichage fiches : typo, justified text
 
@@ -78,6 +72,9 @@ http://127.0.0.1:8000/tests
 * Affichage fiches : lien pied de page en gras, pourquoi ?
 * Affichage fiches : embed, abbr, cite, acronym impossible en markdown ?
 * Affichage fiches : [exemple des balises HTML](http://dev.multibao.org/#newick/grill/blob/master/styleguide.md)
+* Affichage recherche : boucle if pour afficher le bon message
+* Affichage recherche : dynamiser nombre de résultat, recherche, repo
+* Affichage recherche : afficher ou non moteur de recherche
 
 ## Discussion PO
 * Seul les dépôts avec README sont visibles
