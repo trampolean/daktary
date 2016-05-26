@@ -1,0 +1,12 @@
+.search-result {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #000;
+}
+.search-result span,
+.search-result a {
+  color: #29abe2;
+  font-weight: bold;
+}
