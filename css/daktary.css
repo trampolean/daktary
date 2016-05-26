@@ -12,6 +12,7 @@ GENERAL
 body {
   font-family: "Open Sans", Arial, sans-serif;
   font-size: 1rem;
+  line-height: 1.2;
   color: #4d4d4d;
   -webkit-font-smoothing: antialiased;
   background:  #f8f8f8;
@@ -37,6 +38,10 @@ h3 {
 
 h1 {
 font-family: "Montserrat", Arial, sans-serif;
+}
+h1 a {
+  color: #4d4d4d;
+  text-decoration: none;
 }
 h1 span {
   color: #29abe2;

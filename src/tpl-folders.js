@@ -2,18 +2,16 @@
   const htmlContribWithMetas = ({url, title, authors, git_url, prose_url, image_url, description}) =>
     `<article class="gh-list-item gh-type-file">
        <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
-       <div class="gh-list-meta">
-         <p>Créé par : ${authors}</p>
-         <p>
-           <a href="${prose_url}">Editer la fiche</a>
-           <a href="${git_url}">Voir sur Github</a>
-         </p>
+       <div class="gh-list-content">
+         <div class="gh-list-meta">
+           <p>Mise à jour par : ${authors}</p>
+         </div>
+         <img src="${image_url}">
+         <p class="gh-list-excerpt">${description}</p>
+         <a class="gh-list-readmore"
+           title="Lire la suite de la fiche : ${title}"
+           href="#${url}">Lire la fiche</a>
        </div>
-       <img src="${image_url}">
-       <p class="gh-list-excerpt">${description}</p>
-       <a class="gh-list-readmore"
-         title="Lire la suite de la fiche Titre de la fiche"
-         href="#${url}">Lire la fiche</a>
      </article>`
 
   const htmlContribNoMetas = ({url, title}) =>
@@ -22,24 +20,26 @@
      </article>`
 
   const htmlFolderWithMetas = ({url, title, folders, files, contributors, git_url, image_url, description}) =>
-    `<article class="gh-list-item gh-type-repo">
+    `<article class="gh-list-item gh-type-folder">
           <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
-          <div class="gh-list-meta">
-            <p>Dossiers : ${folders} - Fiches : ${files}</p>
-            <p>Contributeurs : ${contributors}</p>
-            </p>
-            <p>
-              <a href="${git_url}">Voir sur Github</a>
-            </p>
+          <div class="gh-list-content">
+            <div class="gh-list-meta">
+              <p>Dossiers : ${folders} - Fiches : ${files}</p>
+              <p>Contributeurs : ${contributors}</p>
+              </p>
+              <p>
+                <a href="${git_url}">Voir sur Github</a>
+              </p>
+            </div>
+            <img src="${image_url}">
+            <p class="gh-list-excerpt">${description}</p>
+            <a class="gh-list-readmore"
+                title="Lire la suite de la fiche : ${title}"
+                href="#${url}">Lire la présentation complète</a>
           </div>
-          <img src="${image_url}">
-          <p class="gh-list-excerpt">${description}</p>
-          <a class="gh-list-readmore"
-              title="Lire la suite de la fiche Titre de la fiche"
-              href="#${url}">Lire la présentation complète</a>
         </article>`
   const htmlFolderNoMetas = ({url, title}) =>
-    `<article class="gh-list-item gh-type-repo">
+    `<article class="gh-list-item gh-type-folder">
       <h2 class="gh-list-title"><a href="#${url}">${title}</a></h2>
     </article>`
 
